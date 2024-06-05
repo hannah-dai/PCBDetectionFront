@@ -31,14 +31,14 @@
 			"path" : "pages/loginPage/login/login",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "登录"
 			}
 		},
 		{
 			"path" : "pages/loginPage/register/register",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "注册"
 			}
 		}
 	],

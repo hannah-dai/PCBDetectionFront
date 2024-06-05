@@ -31,14 +31,14 @@ if (uni.restoreGlobal) {
 }
 (function(vue) {
   "use strict";
-  var _e2, _f, _g, _h, _i, _j, _k, _l;
+  var _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s2, _t2, _u, _v, _w, _x;
   const ON_LOAD = "onLoad";
   const ON_READY = "onReady";
-  function formatAppLog(type, filename, ...args) {
+  function formatAppLog(type2, filename, ...args) {
     if (uni.__log__) {
-      uni.__log__(type, filename, ...args);
+      uni.__log__(type2, filename, ...args);
     } else {
-      console[type].apply(console, [...args, filename]);
+      console[type2].apply(console, [...args, filename]);
     }
   }
   function resolveEasycom(component, easycom) {
@@ -57,7 +57,7 @@ if (uni.restoreGlobal) {
     return target;
   };
   const title = "Welcome!";
-  const _sfc_main$k = {
+  const _sfc_main$r = {
     __name: "index",
     setup(__props) {
       onReady(() => {
@@ -80,7 +80,7 @@ if (uni.restoreGlobal) {
       };
     }
   };
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/index/index.vue"]]);
   const mpMixin = {};
   function email(value) {
     return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(value);
@@ -104,7 +104,7 @@ if (uni.restoreGlobal) {
   function number(value) {
     return /^[\+-]?(\d+\.?\d*|\.\d+|\d\.\d+e\+\d+)$/.test(value);
   }
-  function string(value) {
+  function string$1(value) {
     return typeof value === "string";
   }
   function digits(value) {
@@ -143,7 +143,7 @@ if (uni.restoreGlobal) {
   function contains(value, param) {
     return value.indexOf(param) >= 0;
   }
-  function range$1(value, param) {
+  function range$2(value, param) {
     return value >= param[0] && value <= param[1];
   }
   function rangeLength(value, param) {
@@ -247,10 +247,10 @@ if (uni.restoreGlobal) {
     number,
     object,
     promise,
-    range: range$1,
+    range: range$2,
     rangeLength,
     regExp,
-    string,
+    string: string$1,
     url,
     video
   }, Symbol.toStringTag, { value: "Module" }));
@@ -315,7 +315,7 @@ if (uni.restoreGlobal) {
     }
     return result;
   }
-  function range(min = 0, max = 0, value = 0) {
+  function range$1(min = 0, max = 0, value = 0) {
     return Math.max(min, Math.min(max, Number(value)));
   }
   function getPx(value, unit = false) {
@@ -437,7 +437,7 @@ if (uni.restoreGlobal) {
     cache.set(obj, clone);
     return clone;
   }
-  function deepMerge(target = {}, source = {}) {
+  function deepMerge$1(target = {}, source = {}) {
     target = deepClone(target);
     if (typeof target !== "object" || target === null || typeof source !== "object" || source === null)
       return target;
@@ -456,7 +456,7 @@ if (uni.restoreGlobal) {
       } else if (sourceValue instanceof Set) {
         merged[prop] = new Set(sourceValue);
       } else if (typeof sourceValue === "object" && sourceValue !== null) {
-        merged[prop] = deepMerge(targetValue, sourceValue);
+        merged[prop] = deepMerge$1(targetValue, sourceValue);
       } else {
         merged[prop] = sourceValue;
       }
@@ -468,8 +468,8 @@ if (uni.restoreGlobal) {
       formatAppLog("error", "at uni_modules/uv-ui-tools/libs/function/index.js:250", `uvui提示：${err}`);
     }
   }
-  function randomArray(array2 = []) {
-    return array2.sort(() => Math.random() - 0.5);
+  function randomArray(array3 = []) {
+    return array3.sort(() => Math.random() - 0.5);
   }
   if (!String.prototype.padStart) {
     String.prototype.padStart = function(maxLength, fillString = " ") {
@@ -493,30 +493,30 @@ if (uni.restoreGlobal) {
     };
   }
   function timeFormat(dateTime = null, formatStr = "yyyy-mm-dd") {
-    let date2;
+    let date3;
     if (!dateTime) {
-      date2 = /* @__PURE__ */ new Date();
+      date3 = /* @__PURE__ */ new Date();
     } else if (/^\d{10}$/.test(dateTime == null ? void 0 : dateTime.toString().trim())) {
-      date2 = new Date(dateTime * 1e3);
+      date3 = new Date(dateTime * 1e3);
     } else if (typeof dateTime === "string" && /^\d+$/.test(dateTime.trim())) {
-      date2 = new Date(Number(dateTime));
+      date3 = new Date(Number(dateTime));
     } else if (typeof dateTime === "string" && dateTime.includes("-") && !dateTime.includes("T")) {
-      date2 = new Date(dateTime.replace(/-/g, "/"));
+      date3 = new Date(dateTime.replace(/-/g, "/"));
     } else {
-      date2 = new Date(dateTime);
+      date3 = new Date(dateTime);
     }
     const timeSource = {
-      "y": date2.getFullYear().toString(),
+      "y": date3.getFullYear().toString(),
       // 年
-      "m": (date2.getMonth() + 1).toString().padStart(2, "0"),
+      "m": (date3.getMonth() + 1).toString().padStart(2, "0"),
       // 月
-      "d": date2.getDate().toString().padStart(2, "0"),
+      "d": date3.getDate().toString().padStart(2, "0"),
       // 日
-      "h": date2.getHours().toString().padStart(2, "0"),
+      "h": date3.getHours().toString().padStart(2, "0"),
       // 时
-      "M": date2.getMinutes().toString().padStart(2, "0"),
+      "M": date3.getMinutes().toString().padStart(2, "0"),
       // 分
-      "s": date2.getSeconds().toString().padStart(2, "0")
+      "s": date3.getSeconds().toString().padStart(2, "0")
       // 秒
       // 有其他格式化字符需求可以继续添加，必须转化成字符串
     };
@@ -529,7 +529,7 @@ if (uni.restoreGlobal) {
     }
     return formatStr;
   }
-  function timeFrom(timestamp = null, format = "yyyy-mm-dd") {
+  function timeFrom(timestamp = null, format2 = "yyyy-mm-dd") {
     if (timestamp == null)
       timestamp = Number(/* @__PURE__ */ new Date());
     timestamp = parseInt(timestamp);
@@ -552,14 +552,14 @@ if (uni.restoreGlobal) {
         tips = `${parseInt(timer / 86400)}天前`;
         break;
       default:
-        if (format === false) {
+        if (format2 === false) {
           if (timer >= 2592e3 && timer < 365 * 86400) {
             tips = `${parseInt(timer / (86400 * 30))}个月前`;
           } else {
             tips = `${parseInt(timer / (86400 * 365))}年前`;
           }
         } else {
-          tips = timeFormat(timestamp, format);
+          tips = timeFormat(timestamp, format2);
         }
     }
     return tips;
@@ -632,11 +632,11 @@ if (uni.restoreGlobal) {
       duration
     });
   }
-  function type2icon(type = "success", fill = false) {
-    if (["primary", "info", "error", "warning", "success"].indexOf(type) == -1)
-      type = "success";
+  function type2icon(type2 = "success", fill = false) {
+    if (["primary", "info", "error", "warning", "success"].indexOf(type2) == -1)
+      type2 = "success";
     let iconName = "";
-    switch (type) {
+    switch (type2) {
       case "primary":
         iconName = "info-circle";
         break;
@@ -659,9 +659,9 @@ if (uni.restoreGlobal) {
       iconName += "-fill";
     return iconName;
   }
-  function priceFormat(number2, decimals = 0, decimalPoint = ".", thousandsSeparator = ",") {
-    number2 = `${number2}`.replace(/[^0-9+-Ee.]/g, "");
-    const n2 = !isFinite(+number2) ? 0 : +number2;
+  function priceFormat(number22, decimals = 0, decimalPoint = ".", thousandsSeparator = ",") {
+    number22 = `${number22}`.replace(/[^0-9+-Ee.]/g, "");
+    const n2 = !isFinite(+number22) ? 0 : +number22;
     const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
     const sep = typeof thousandsSeparator === "undefined" ? "," : thousandsSeparator;
     const dec = typeof decimalPoint === "undefined" ? "." : decimalPoint;
@@ -782,7 +782,7 @@ if (uni.restoreGlobal) {
     addStyle,
     addUnit,
     deepClone,
-    deepMerge,
+    deepMerge: deepMerge$1,
     error,
     formValidate,
     getDuration,
@@ -798,7 +798,7 @@ if (uni.restoreGlobal) {
     queryParams,
     random,
     randomArray,
-    range,
+    range: range$1,
     setConfig,
     setProperty,
     sleep,
@@ -851,7 +851,7 @@ if (uni.restoreGlobal) {
         mergeConfig.url = this.mixinParam(options, params);
         mergeConfig.type = "navigateTo";
       } else {
-        mergeConfig = deepMerge(this.config, options);
+        mergeConfig = deepMerge$1(this.config, options);
         mergeConfig.url = this.mixinParam(options.url, options.params);
       }
       if (mergeConfig.url === page())
@@ -860,7 +860,7 @@ if (uni.restoreGlobal) {
         mergeConfig.intercept = params.intercept;
       }
       mergeConfig.params = params;
-      mergeConfig = deepMerge(this.config, mergeConfig);
+      mergeConfig = deepMerge$1(this.config, mergeConfig);
       if (typeof mergeConfig.intercept === "function") {
         const isNext = await new Promise((resolve, reject) => {
           mergeConfig.intercept(mergeConfig, resolve);
@@ -874,7 +874,7 @@ if (uni.restoreGlobal) {
     openPage(config) {
       const {
         url: url2,
-        type,
+        type: type2,
         delta,
         animationType,
         animationDuration,
@@ -1249,7 +1249,7 @@ if (uni.restoreGlobal) {
     "uvicon-twitte": "e607",
     "uvicon-twitter-circle-fill": "e6cf"
   };
-  const props$3 = {
+  const props$9 = {
     props: {
       // 图标类名
       name: {
@@ -1339,10 +1339,10 @@ if (uni.restoreGlobal) {
       ...(_f = (_e2 = uni.$uv) == null ? void 0 : _e2.props) == null ? void 0 : _f.icon
     }
   };
-  const _sfc_main$j = {
+  const _sfc_main$q = {
     name: "uv-icon",
     emits: ["click"],
-    mixins: [mpMixin, mixin, props$3],
+    mixins: [mpMixin, mixin, props$9],
     data() {
       return {
         colorType: [
@@ -1400,7 +1400,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1444,8 +1444,8 @@ if (uni.restoreGlobal) {
       /* CLASS */
     );
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$d], ["__scopeId", "data-v-b7a6dd5d"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/uv-icon/components/uv-icon/uv-icon.vue"]]);
-  const props$2 = {
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$l], ["__scopeId", "data-v-b7a6dd5d"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-icon/components/uv-icon/uv-icon.vue"]]);
+  const props$8 = {
     props: {
       // 是否显示圆点
       isDot: {
@@ -1518,9 +1518,9 @@ if (uni.restoreGlobal) {
       ...(_h = (_g = uni.$uv) == null ? void 0 : _g.props) == null ? void 0 : _h.badge
     }
   };
-  const _sfc_main$i = {
+  const _sfc_main$p = {
     name: "uv-badge",
-    mixins: [mpMixin, mixin, props$2],
+    mixins: [mpMixin, mixin, props$8],
     computed: {
       // 是否将badge中心与父组件右上角重合
       boxStyle() {
@@ -1564,7 +1564,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     return _ctx.show && ((Number(_ctx.value) === 0 ? _ctx.showZero : true) || _ctx.isDot) ? (vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -1577,8 +1577,8 @@ if (uni.restoreGlobal) {
       /* TEXT, CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$c], ["__scopeId", "data-v-91e4945b"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/uv-badge/components/uv-badge/uv-badge.vue"]]);
-  const props$1 = {
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$k], ["__scopeId", "data-v-91e4945b"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-badge/components/uv-badge/uv-badge.vue"]]);
+  const props$7 = {
     props: {
       // item标签的名称，作为与uv-tabbar的value参数匹配的标识符
       name: {
@@ -1618,9 +1618,9 @@ if (uni.restoreGlobal) {
       ...(_j = (_i = uni.$uv) == null ? void 0 : _i.props) == null ? void 0 : _j.tabbarItem
     }
   };
-  const _sfc_main$h = {
+  const _sfc_main$o = {
     name: "uv-tabbar-item",
-    mixins: [mpMixin, mixin, props$1],
+    mixins: [mpMixin, mixin, props$7],
     emits: ["click", "change"],
     data() {
       return {
@@ -1665,9 +1665,9 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uv_icon = resolveEasycom(vue.resolveDynamicComponent("uv-icon"), __easycom_0$4);
-    const _component_uv_badge = resolveEasycom(vue.resolveDynamicComponent("uv-badge"), __easycom_1$2);
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_icon = resolveEasycom(vue.resolveDynamicComponent("uv-icon"), __easycom_1$5);
+    const _component_uv_badge = resolveEasycom(vue.resolveDynamicComponent("uv-badge"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1719,8 +1719,8 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$b], ["__scopeId", "data-v-f9097980"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/uv-tabbar/components/uv-tabbar-item/uv-tabbar-item.vue"]]);
-  const _sfc_main$g = {
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$j], ["__scopeId", "data-v-f9097980"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-tabbar/components/uv-tabbar-item/uv-tabbar-item.vue"]]);
+  const _sfc_main$n = {
     name: "uv-safe-bottom",
     mixins: [mpMixin, mixin],
     data() {
@@ -1738,7 +1738,7 @@ if (uni.restoreGlobal) {
     mounted() {
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1750,8 +1750,8 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$a], ["__scopeId", "data-v-560f16b2"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/uv-safe-bottom/components/uv-safe-bottom/uv-safe-bottom.vue"]]);
-  const props = {
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$i], ["__scopeId", "data-v-560f16b2"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-safe-bottom/components/uv-safe-bottom/uv-safe-bottom.vue"]]);
+  const props$6 = {
     props: {
       // 当前匹配项的name
       value: {
@@ -1801,9 +1801,9 @@ if (uni.restoreGlobal) {
       ...(_l = (_k = uni.$uv) == null ? void 0 : _k.props) == null ? void 0 : _l.tabbar
     }
   };
-  const _sfc_main$f = {
+  const _sfc_main$m = {
     name: "uv-tabbar",
-    mixins: [mpMixin, mixin, props],
+    mixins: [mpMixin, mixin, props$6],
     data() {
       return {
         placeholderHeight: 0
@@ -1853,8 +1853,8 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uv_safe_bottom = resolveEasycom(vue.resolveDynamicComponent("uv-safe-bottom"), __easycom_0$2);
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_safe_bottom = resolveEasycom(vue.resolveDynamicComponent("uv-safe-bottom"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uv-tabbar" }, [
       vue.createElementVNode(
         "view",
@@ -1888,7 +1888,7 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$9], ["__scopeId", "data-v-cae58123"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/uv-tabbar/components/uv-tabbar/uv-tabbar.vue"]]);
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$h], ["__scopeId", "data-v-cae58123"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-tabbar/components/uv-tabbar/uv-tabbar.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -2204,13 +2204,13 @@ if (uni.restoreGlobal) {
       }, 4e4);
     }
   }
-  function toastMessage(message, type) {
+  function toastMessage(message, type2) {
     const piniaMessage = "🍍 " + message;
     if (typeof __VUE_DEVTOOLS_TOAST__ === "function") {
-      __VUE_DEVTOOLS_TOAST__(piniaMessage, type);
-    } else if (type === "error") {
+      __VUE_DEVTOOLS_TOAST__(piniaMessage, type2);
+    } else if (type2 === "error") {
       console.error(piniaMessage);
-    } else if (type === "warn") {
+    } else if (type2 === "warn") {
       console.warn(piniaMessage);
     } else {
       console.log(piniaMessage);
@@ -2407,8 +2407,8 @@ if (uni.restoreGlobal) {
       };
     }
   }
-  function formatMutationType(type) {
-    switch (type) {
+  function formatMutationType(type2) {
+    switch (type2) {
       case MutationType.direct:
         return "mutation";
       case MutationType.patchFunction:
@@ -2705,20 +2705,20 @@ Only state can be modified.`);
           }
         }, { deep: true });
       });
-      store.$subscribe(({ events, type }, state) => {
+      store.$subscribe(({ events, type: type2 }, state) => {
         api.notifyComponentUpdate();
         api.sendInspectorState(INSPECTOR_ID);
         if (!isTimelineActive)
           return;
         const eventData = {
           time: now2(),
-          title: formatMutationType(type),
+          title: formatMutationType(type2),
           data: assign$1({ store: formatDisplay(store.$id) }, formatEventData(events)),
           groupId: activeAction
         };
-        if (type === MutationType.patchFunction) {
+        if (type2 === MutationType.patchFunction) {
           eventData.subtitle = "⤵️";
-        } else if (type === MutationType.patchObject) {
+        } else if (type2 === MutationType.patchObject) {
           eventData.subtitle = "🧩";
         } else if (events && !Array.isArray(events)) {
           eventData.subtitle = events.type;
@@ -2818,7 +2818,7 @@ Only state can be modified.`);
   function createPinia() {
     const scope = vue.effectScope(true);
     const state = scope.run(() => vue.ref({}));
-    let _p = [];
+    let _p2 = [];
     let toBeInstalled = [];
     const pinia = vue.markRaw({
       install(app) {
@@ -2830,7 +2830,7 @@ Only state can be modified.`);
           if (USE_DEVTOOLS) {
             registerPiniaDevtools(app, pinia);
           }
-          toBeInstalled.forEach((plugin) => _p.push(plugin));
+          toBeInstalled.forEach((plugin) => _p2.push(plugin));
           toBeInstalled = [];
         }
       },
@@ -2838,11 +2838,11 @@ Only state can be modified.`);
         if (!this._a && !isVue2) {
           toBeInstalled.push(plugin);
         } else {
-          _p.push(plugin);
+          _p2.push(plugin);
         }
         return this;
       },
-      _p,
+      _p: _p2,
       // it's actually undefined here
       // @ts-expect-error
       _a: null,
@@ -3509,7 +3509,7 @@ This will fail in production if not fixed.`);
       tabBarValue
     };
   });
-  const _sfc_main$e = {
+  const _sfc_main$l = {
     __name: "bottomBar",
     setup(__props) {
       const tabBarNavigaterStore = useTabBarNavigateStore();
@@ -3530,8 +3530,8 @@ This will fail in production if not fixed.`);
         });
       };
       return (_ctx, _cache) => {
-        const _component_uv_tabbar_item = resolveEasycom(vue.resolveDynamicComponent("uv-tabbar-item"), __easycom_0$3);
-        const _component_uv_tabbar = resolveEasycom(vue.resolveDynamicComponent("uv-tabbar"), __easycom_1$1);
+        const _component_uv_tabbar_item = resolveEasycom(vue.resolveDynamicComponent("uv-tabbar-item"), __easycom_0$5);
+        const _component_uv_tabbar = resolveEasycom(vue.resolveDynamicComponent("uv-tabbar"), __easycom_1$3);
         return vue.openBlock(), vue.createElementBlock("view", null, [
           vue.createVNode(_component_uv_tabbar, {
             value: vue.unref(tabBarValue),
@@ -3565,8 +3565,8 @@ This will fail in production if not fixed.`);
       };
     }
   };
-  const bottomBar = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__file", "E:/HbuilderXProject/PCBDetectionFront/components/bottomBar/bottomBar.vue"]]);
-  const _sfc_main$d = {
+  const bottomBar = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/components/bottomBar/bottomBar.vue"]]);
+  const _sfc_main$k = {
     __name: "CamaraTest",
     setup(__props) {
       const imageList = vue.ref([]);
@@ -3709,8 +3709,8 @@ This will fail in production if not fixed.`);
       };
     }
   };
-  const PagesCamaraTestCamaraTest = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/CamaraTest/CamaraTest.vue"]]);
-  const _sfc_main$c = {
+  const PagesCamaraTestCamaraTest = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/CamaraTest/CamaraTest.vue"]]);
+  const _sfc_main$j = {
     __name: "picturePreview",
     setup(__props) {
       vue.ref("downloadFile");
@@ -3762,7 +3762,7 @@ This will fail in production if not fixed.`);
       };
     }
   };
-  const PagesPicturePreviewPicturePreview = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/picturePreview/picturePreview.vue"]]);
+  const PagesPicturePreviewPicturePreview = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/picturePreview/picturePreview.vue"]]);
   const pages = [
     {
       path: "pages/index/index",
@@ -3791,13 +3791,13 @@ This will fail in production if not fixed.`);
     {
       path: "pages/loginPage/login/login",
       style: {
-        navigationBarTitleText: ""
+        navigationBarTitleText: "登录"
       }
     },
     {
       path: "pages/loginPage/register/register",
       style: {
-        navigationBarTitleText: ""
+        navigationBarTitleText: "注册"
       }
     }
   ];
@@ -6502,13 +6502,13 @@ ${i3}
     } }), bs(Bs), Bs.addInterceptor = N, Bs.removeInterceptor = D, Bs.interceptObject = F;
   })();
   var Ws = Bs;
-  const _sfc_main$b = {
+  const _sfc_main$i = {
     name: "loading1",
     data() {
       return {};
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading1" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -6516,14 +6516,14 @@ ${i3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$8], ["__scopeId", "data-v-0e645258"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
-  const _sfc_main$a = {
+  const Loading1 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$g], ["__scopeId", "data-v-0e645258"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading1.vue"]]);
+  const _sfc_main$h = {
     name: "loading2",
     data() {
       return {};
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading2" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -6531,14 +6531,14 @@ ${i3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$7], ["__scopeId", "data-v-3df48dc2"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
-  const _sfc_main$9 = {
+  const Loading2 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$f], ["__scopeId", "data-v-3df48dc2"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading2.vue"]]);
+  const _sfc_main$g = {
     name: "loading3",
     data() {
       return {};
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading3" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -6546,14 +6546,14 @@ ${i3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$6], ["__scopeId", "data-v-27a8293c"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
-  const _sfc_main$8 = {
+  const Loading3 = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$e], ["__scopeId", "data-v-27a8293c"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading3.vue"]]);
+  const _sfc_main$f = {
     name: "loading5",
     data() {
       return {};
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading5" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -6561,14 +6561,14 @@ ${i3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$5], ["__scopeId", "data-v-2e7deb83"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
-  const _sfc_main$7 = {
+  const Loading4 = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$d], ["__scopeId", "data-v-2e7deb83"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading4.vue"]]);
+  const _sfc_main$e = {
     name: "loading6",
     data() {
       return {};
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container loading6" }, [
       vue.createElementVNode("view", { class: "shape shape1" }),
       vue.createElementVNode("view", { class: "shape shape2" }),
@@ -6576,8 +6576,8 @@ ${i3}
       vue.createElementVNode("view", { class: "shape shape4" })
     ]);
   }
-  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$4], ["__scopeId", "data-v-ef674bbb"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
-  const _sfc_main$6 = {
+  const Loading5 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$c], ["__scopeId", "data-v-ef674bbb"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/loading5.vue"]]);
+  const _sfc_main$d = {
     components: { Loading1, Loading2, Loading3, Loading4, Loading5 },
     name: "qiun-loading",
     props: {
@@ -6590,7 +6590,7 @@ ${i3}
       return {};
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_Loading1 = vue.resolveComponent("Loading1");
     const _component_Loading2 = vue.resolveComponent("Loading2");
     const _component_Loading3 = vue.resolveComponent("Loading3");
@@ -6604,8 +6604,8 @@ ${i3}
       $props.loadingType == 5 ? (vue.openBlock(), vue.createBlock(_component_Loading5, { key: 4 })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$3], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
-  const _sfc_main$5 = {
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$b], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-loading/qiun-loading.vue"]]);
+  const _sfc_main$c = {
     name: "qiun-error",
     props: {
       errorMessage: {
@@ -6617,7 +6617,7 @@ ${i3}
       return {};
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "chartsview" }, [
       vue.createElementVNode("view", { class: "charts-error" }),
       vue.createElementVNode(
@@ -6629,20 +6629,20 @@ ${i3}
       )
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$2], ["__scopeId", "data-v-a99d579b"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$a], ["__scopeId", "data-v-a99d579b"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-error/qiun-error.vue"]]);
   const color$1 = ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"];
   const formatDateTime = (timeStamp, returnType) => {
-    var date2 = /* @__PURE__ */ new Date();
-    date2.setTime(timeStamp * 1e3);
-    var y2 = date2.getFullYear();
-    var m2 = date2.getMonth() + 1;
+    var date3 = /* @__PURE__ */ new Date();
+    date3.setTime(timeStamp * 1e3);
+    var y2 = date3.getFullYear();
+    var m2 = date3.getMonth() + 1;
     m2 = m2 < 10 ? "0" + m2 : m2;
-    var d2 = date2.getDate();
+    var d2 = date3.getDate();
     d2 = d2 < 10 ? "0" + d2 : d2;
-    var h2 = date2.getHours();
+    var h2 = date3.getHours();
     h2 = h2 < 10 ? "0" + h2 : h2;
-    var minute = date2.getMinutes();
-    var second = date2.getSeconds();
+    var minute = date3.getMinutes();
+    var second = date3.getSeconds();
     minute = minute < 10 ? "0" + minute : minute;
     second = second < 10 ? "0" + second : second;
     if (returnType == "full") {
@@ -7631,11 +7631,11 @@ ${i3}
     }
     return args;
   }
-  function getFormatDate(date2) {
+  function getFormatDate(date3) {
     var seperator = "-";
-    var year = date2.getFullYear();
-    var month = date2.getMonth() + 1;
-    var strDate = date2.getDate();
+    var year = date3.getFullYear();
+    var month = date3.getMonth() + 1;
+    var strDate = date3.getDate();
     if (month >= 1 && month <= 9) {
       month = "0" + month;
     }
@@ -7645,7 +7645,7 @@ ${i3}
     var currentdate = year + seperator + month + seperator + strDate;
     return currentdate;
   }
-  const _sfc_main$4 = {
+  const _sfc_main$b = {
     name: "qiun-data-charts",
     mixins: [Ws.mixinDatacom],
     props: {
@@ -8351,9 +8351,9 @@ ${i3}
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_qiun_loading = resolveEasycom(vue.resolveDynamicComponent("qiun-loading"), __easycom_0$1);
-    const _component_qiun_error = resolveEasycom(vue.resolveDynamicComponent("qiun-error"), __easycom_1);
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_qiun_loading = resolveEasycom(vue.resolveDynamicComponent("qiun-loading"), __easycom_0$3);
+    const _component_qiun_error = resolveEasycom(vue.resolveDynamicComponent("qiun-error"), __easycom_1$2);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "chartsview",
       id: "ChartBoxId" + $data.cid
@@ -8409,9 +8409,9 @@ ${i3}
     ], 8, ["id"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$4);
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$1], ["__scopeId", "data-v-0ca34aee"], ["__file", "E:/HbuilderXProject/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
-  const _sfc_main$3 = {
+    block0(_sfc_main$b);
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$9], ["__scopeId", "data-v-0ca34aee"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
+  const _sfc_main$a = {
     __name: "chartsTest",
     setup(__props) {
       const chartData = vue.ref({});
@@ -8462,7 +8462,7 @@ ${i3}
         getServerData();
       });
       return (_ctx, _cache) => {
-        const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_0);
+        const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock(
           vue.Fragment,
           null,
@@ -8486,41 +8486,3108 @@ ${i3}
       };
     }
   };
-  const PagesChartsTestChartsTest = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/chartsTest/chartsTest.vue"]]);
+  const PagesChartsTestChartsTest = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/chartsTest/chartsTest.vue"]]);
+  const props$5 = {
+    props: {
+      value: {
+        type: [String, Number],
+        default: ""
+      },
+      modelValue: {
+        type: [String, Number],
+        default: ""
+      },
+      // 输入框类型
+      // number-数字输入键盘，app-vue下可以输入浮点数，app-nvue和小程序平台下只能输入整数
+      // idcard-身份证输入键盘，微信、支付宝、百度、QQ小程序
+      // digit-带小数点的数字键盘，App的nvue页面、微信、支付宝、百度、头条、QQ小程序
+      // text-文本输入键盘
+      type: {
+        type: String,
+        default: "text"
+      },
+      // 是否禁用输入框
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      // 禁用状态时的背景色
+      disabledColor: {
+        type: String,
+        default: "#f5f7fa"
+      },
+      // 是否显示清除控件
+      clearable: {
+        type: Boolean,
+        default: false
+      },
+      // 是否密码类型
+      password: {
+        type: Boolean,
+        default: false
+      },
+      // 最大输入长度，设置为 -1 的时候不限制最大长度
+      maxlength: {
+        type: [String, Number],
+        default: -1
+      },
+      // 	输入框为空时的占位符
+      placeholder: {
+        type: String,
+        default: null
+      },
+      // 指定placeholder的样式类，注意页面或组件的style中写了scoped时，需要在类名前写/deep/
+      placeholderClass: {
+        type: String,
+        default: "input-placeholder"
+      },
+      // 指定placeholder的样式
+      placeholderStyle: {
+        type: [String, Object],
+        default: "color: #c0c4cc"
+      },
+      // 设置右下角按钮的文字，有效值：send|search|next|go|done，兼容性详见uni-app文档
+      // https://uniapp.dcloud.io/component/input
+      // https://uniapp.dcloud.io/component/textarea
+      confirmType: {
+        type: String,
+        default: "done"
+      },
+      // 点击键盘右下角按钮时是否保持键盘不收起，H5无效
+      confirmHold: {
+        type: Boolean,
+        default: false
+      },
+      // focus时，点击页面的时候不收起键盘，微信小程序有效
+      holdKeyboard: {
+        type: Boolean,
+        default: false
+      },
+      // 自动获取焦点
+      // 在 H5 平台能否聚焦以及软键盘是否跟随弹出，取决于当前浏览器本身的实现。nvue 页面不支持，需使用组件的 focus()、blur() 方法控制焦点
+      focus: {
+        type: Boolean,
+        default: false
+      },
+      // 键盘收起时，是否自动失去焦点，目前仅App3.0.0+有效
+      autoBlur: {
+        type: Boolean,
+        default: false
+      },
+      // 指定focus时光标的位置
+      cursor: {
+        type: [String, Number],
+        default: -1
+      },
+      // 输入框聚焦时底部与键盘的距离
+      cursorSpacing: {
+        type: [String, Number],
+        default: 30
+      },
+      // 光标起始位置，自动聚集时有效，需与selection-end搭配使用
+      selectionStart: {
+        type: [String, Number],
+        default: -1
+      },
+      // 光标结束位置，自动聚集时有效，需与selection-start搭配使用
+      selectionEnd: {
+        type: [String, Number],
+        default: -1
+      },
+      // 键盘弹起时，是否自动上推页面
+      adjustPosition: {
+        type: Boolean,
+        default: true
+      },
+      // 输入框内容对齐方式，可选值为：left|center|right
+      inputAlign: {
+        type: String,
+        default: "left"
+      },
+      // 输入框字体的大小
+      fontSize: {
+        type: [String, Number],
+        default: "14px"
+      },
+      // 输入框字体颜色
+      color: {
+        type: String,
+        default: "#303133"
+      },
+      // 输入框前置图标
+      prefixIcon: {
+        type: String,
+        default: ""
+      },
+      // 前置图标样式，对象或字符串
+      prefixIconStyle: {
+        type: [String, Object],
+        default: ""
+      },
+      // 输入框后置图标
+      suffixIcon: {
+        type: String,
+        default: ""
+      },
+      // 后置图标样式，对象或字符串
+      suffixIconStyle: {
+        type: [String, Object],
+        default: ""
+      },
+      // 边框类型，surround-四周边框，bottom-底部边框，none-无边框
+      border: {
+        type: String,
+        default: "surround"
+      },
+      // 是否只读，与disabled不同之处在于disabled会置灰组件，而readonly则不会
+      readonly: {
+        type: Boolean,
+        default: false
+      },
+      // 输入框形状，circle-圆形，square-方形
+      shape: {
+        type: String,
+        default: "square"
+      },
+      // 用于处理或者过滤输入框内容的方法
+      formatter: {
+        type: [Function, null],
+        default: null
+      },
+      // 是否忽略组件内对文本合成系统事件的处理
+      ignoreCompositionEvent: {
+        type: Boolean,
+        default: true
+      },
+      ...(_n = (_m = uni.$uv) == null ? void 0 : _m.props) == null ? void 0 : _n.input
+    }
+  };
+  const _sfc_main$9 = {
+    name: "uv-input",
+    mixins: [mpMixin, mixin, props$5],
+    data() {
+      return {
+        // 输入框的值
+        innerValue: "",
+        // 是否处于获得焦点状态
+        focused: false,
+        // 过滤处理方法
+        innerFormatter: (value) => value
+      };
+    },
+    created() {
+      this.innerValue = this.modelValue;
+    },
+    watch: {
+      value(newVal) {
+        this.innerValue = newVal;
+      },
+      modelValue(newVal) {
+        this.innerValue = newVal;
+      }
+    },
+    computed: {
+      // 是否显示清除控件
+      isShowClear() {
+        const { clearable, readonly, focused, innerValue } = this;
+        return !!clearable && !readonly && !!focused && innerValue !== "";
+      },
+      // 组件的类名
+      inputClass() {
+        let classes = [], { border, disabled, shape } = this;
+        border === "surround" && (classes = classes.concat(["uv-border", "uv-input--radius"]));
+        classes.push(`uv-input--${shape}`);
+        border === "bottom" && (classes = classes.concat([
+          "uv-border-bottom",
+          "uv-input--no-radius"
+        ]));
+        return classes.join(" ");
+      },
+      // 组件的样式
+      wrapperStyle() {
+        const style = {};
+        if (this.disabled) {
+          style.backgroundColor = this.disabledColor;
+        }
+        if (this.border === "none") {
+          style.padding = "0";
+        } else {
+          style.paddingTop = "6px";
+          style.paddingBottom = "6px";
+          style.paddingLeft = "9px";
+          style.paddingRight = "9px";
+        }
+        return this.$uv.deepMerge(style, this.$uv.addStyle(this.customStyle));
+      },
+      // 输入框的样式
+      inputStyle() {
+        const style = {
+          color: this.color,
+          fontSize: this.$uv.addUnit(this.fontSize),
+          textAlign: this.inputAlign
+        };
+        if (this.disabled || this.readonly) {
+          style["pointer-events"] = "none";
+        }
+        return style;
+      }
+    },
+    methods: {
+      // 在微信小程序中，不支持将函数当做props参数，故只能通过ref形式调用
+      setFormatter(e2) {
+        this.innerFormatter = e2;
+      },
+      // 当键盘输入时，触发input事件
+      onInput(e2) {
+        let { value = "" } = e2.detail || {};
+        const formatter = this.formatter || this.innerFormatter;
+        const formatValue = formatter(value);
+        this.innerValue = value;
+        this.$nextTick(() => {
+          this.innerValue = formatValue;
+          this.valueChange();
+        });
+      },
+      // 输入框失去焦点时触发
+      onBlur(event) {
+        this.$emit("blur", event.detail.value);
+        this.$uv.sleep(100).then(() => {
+          this.focused = false;
+        });
+        this.$uv.formValidate(this, "blur");
+      },
+      // 输入框聚焦时触发
+      onFocus(event) {
+        this.focused = true;
+        this.$emit("focus");
+      },
+      // 点击完成按钮时触发
+      onConfirm(event) {
+        this.$emit("confirm", this.innerValue);
+      },
+      // 键盘高度发生变化的时候触发此事件
+      // 兼容性：微信小程序2.7.0+、App 3.1.0+
+      onkeyboardheightchange(e2) {
+        this.$emit("keyboardheightchange", e2);
+      },
+      // 内容发生变化，进行处理
+      valueChange() {
+        if (this.isClear)
+          this.innerValue = "";
+        const value = this.innerValue;
+        this.$nextTick(() => {
+          this.$emit("input", value);
+          this.$emit("update:modelValue", value);
+          this.$emit("change", value);
+          this.$uv.formValidate(this, "change");
+        });
+      },
+      // 点击清除控件
+      onClear() {
+        this.innerValue = "";
+        this.isClear = true;
+        this.$uv.sleep(200).then((res) => {
+          this.isClear = false;
+        });
+        this.$nextTick(() => {
+          this.$emit("clear");
+          this.valueChange();
+        });
+      },
+      /**
+       * 在安卓nvue上，事件无法冒泡
+       * 在某些时间，我们希望监听uv-from-item的点击事件，此时会导致点击uv-form-item内的uv-input后
+       * 无法触发uv-form-item的点击事件，这里通过手动调用uv-form-item的方法进行触发
+       */
+      clickHandler() {
+      }
+    }
+  };
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_icon = resolveEasycom(vue.resolveDynamicComponent("uv-icon"), __easycom_1$5);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uv-input", $options.inputClass]),
+        style: vue.normalizeStyle([$options.wrapperStyle])
+      },
+      [
+        vue.createElementVNode("view", { class: "uv-input__content" }, [
+          vue.createElementVNode("view", { class: "uv-input__content__prefix-icon" }, [
+            vue.renderSlot(_ctx.$slots, "prefix", {}, () => [
+              _ctx.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uv_icon, {
+                key: 0,
+                name: _ctx.prefixIcon,
+                size: "18",
+                customStyle: _ctx.prefixIconStyle
+              }, null, 8, ["name", "customStyle"])) : vue.createCommentVNode("v-if", true)
+            ], true)
+          ]),
+          vue.createElementVNode("view", {
+            class: "uv-input__content__field-wrapper",
+            onClick: _cache[5] || (_cache[5] = (...args) => $options.clickHandler && $options.clickHandler(...args))
+          }, [
+            vue.createCommentVNode(" 根据uni-app的input组件文档，H5和APP中只要声明了password参数(无论true还是false)，type均失效，此时\r\n				为了防止type=number时，又存在password属性，type无效，此时需要设置password为undefined\r\n			 "),
+            vue.createElementVNode("input", {
+              class: "uv-input__content__field-wrapper__field",
+              style: vue.normalizeStyle([$options.inputStyle]),
+              type: _ctx.type,
+              focus: _ctx.focus,
+              cursor: _ctx.cursor,
+              value: $data.innerValue,
+              "auto-blur": _ctx.autoBlur,
+              disabled: _ctx.disabled || _ctx.readonly,
+              maxlength: _ctx.maxlength,
+              placeholder: _ctx.placeholder,
+              "placeholder-style": _ctx.placeholderStyle,
+              "placeholder-class": _ctx.placeholderClass,
+              "confirm-type": _ctx.confirmType,
+              "confirm-hold": _ctx.confirmHold,
+              "hold-keyboard": _ctx.holdKeyboard,
+              "cursor-spacing": _ctx.cursorSpacing,
+              "adjust-position": _ctx.adjustPosition,
+              "selection-end": _ctx.selectionEnd,
+              "selection-start": _ctx.selectionStart,
+              password: _ctx.password || _ctx.type === "password" || void 0,
+              ignoreCompositionEvent: _ctx.ignoreCompositionEvent,
+              onInput: _cache[0] || (_cache[0] = (...args) => $options.onInput && $options.onInput(...args)),
+              onBlur: _cache[1] || (_cache[1] = (...args) => $options.onBlur && $options.onBlur(...args)),
+              onFocus: _cache[2] || (_cache[2] = (...args) => $options.onFocus && $options.onFocus(...args)),
+              onConfirm: _cache[3] || (_cache[3] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[4] || (_cache[4] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 44, ["type", "focus", "cursor", "value", "auto-blur", "disabled", "maxlength", "placeholder", "placeholder-style", "placeholder-class", "confirm-type", "confirm-hold", "hold-keyboard", "cursor-spacing", "adjust-position", "selection-end", "selection-start", "password", "ignoreCompositionEvent"])
+          ]),
+          $options.isShowClear ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "uv-input__content__clear",
+            onClick: _cache[6] || (_cache[6] = (...args) => $options.onClear && $options.onClear(...args))
+          }, [
+            vue.createVNode(_component_uv_icon, {
+              name: "close",
+              size: "11",
+              color: "#ffffff",
+              customStyle: "line-height: 12px"
+            })
+          ])) : vue.createCommentVNode("v-if", true),
+          vue.createElementVNode("view", { class: "uv-input__content__subfix-icon" }, [
+            vue.renderSlot(_ctx.$slots, "suffix", {}, () => [
+              _ctx.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uv_icon, {
+                key: 0,
+                name: _ctx.suffixIcon,
+                size: "18",
+                customStyle: _ctx.suffixIconStyle
+              }, null, 8, ["name", "customStyle"])) : vue.createCommentVNode("v-if", true)
+            ], true)
+          ])
+        ])
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-651602aa"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-input/components/uv-input/uv-input.vue"]]);
+  class MPAnimation {
+    constructor(options, _this) {
+      this.options = options;
+      this.animation = uni.createAnimation({
+        ...options
+      });
+      this.currentStepAnimates = {};
+      this.next = 0;
+      this.$ = _this;
+    }
+    _nvuePushAnimates(type2, args) {
+      let aniObj = this.currentStepAnimates[this.next];
+      let styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type2)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = "";
+        }
+        let unit = "";
+        if (type2 === "rotate") {
+          unit = "deg";
+        }
+        styles.styles.transform += `${type2}(${args + unit}) `;
+      } else {
+        styles.styles[type2] = `${args}`;
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+    _animateRun(styles = {}, config = {}) {
+      let ref = this.$.$refs["ani"].ref;
+      if (!ref)
+        return;
+      return new Promise((resolve, reject) => {
+        nvueAnimation.transition(ref, {
+          styles,
+          ...config
+        }, (res) => {
+          resolve();
+        });
+      });
+    }
+    _nvueNextAnimate(animates, step = 0, fn) {
+      let obj = animates[step];
+      if (obj) {
+        let {
+          styles,
+          config
+        } = obj;
+        this._animateRun(styles, config).then(() => {
+          step += 1;
+          this._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === "function" && fn();
+        this.isEnd = true;
+      }
+    }
+    step(config = {}) {
+      this.animation.step(config);
+      return this;
+    }
+    run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(() => {
+        typeof fn === "function" && fn();
+      }, this.$.durationTime);
+    }
+  }
+  const animateTypes1 = [
+    "matrix",
+    "matrix3d",
+    "rotate",
+    "rotate3d",
+    "rotateX",
+    "rotateY",
+    "rotateZ",
+    "scale",
+    "scale3d",
+    "scaleX",
+    "scaleY",
+    "scaleZ",
+    "skew",
+    "skewX",
+    "skewY",
+    "translate",
+    "translate3d",
+    "translateX",
+    "translateY",
+    "translateZ"
+  ];
+  const animateTypes2 = ["opacity", "backgroundColor"];
+  const animateTypes3 = ["width", "height", "left", "right", "top", "bottom"];
+  animateTypes1.concat(animateTypes2, animateTypes3).forEach((type2) => {
+    MPAnimation.prototype[type2] = function(...args) {
+      this.animation[type2](...args);
+      return this;
+    };
+  });
+  function createAnimation(option, _this) {
+    if (!_this)
+      return;
+    clearTimeout(_this.timer);
+    return new MPAnimation(option, _this);
+  }
+  const _sfc_main$8 = {
+    name: "uv-transition",
+    mixins: [mpMixin, mixin],
+    emits: ["click", "change"],
+    props: {
+      // 是否展示组件
+      show: {
+        type: Boolean,
+        default: false
+      },
+      // 使用的动画模式
+      mode: {
+        type: [Array, String, null],
+        default() {
+          return "fade";
+        }
+      },
+      // 动画的执行时间，单位ms
+      duration: {
+        type: [String, Number],
+        default: 300
+      },
+      // 使用的动画过渡函数
+      timingFunction: {
+        type: String,
+        default: "ease-out"
+      },
+      customClass: {
+        type: String,
+        default: ""
+      },
+      // nvue模式下 是否直接显示，在uv-list等cell下面使用就需要设置
+      cellChild: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        isShow: false,
+        transform: "",
+        opacity: 1,
+        animationData: {},
+        durationTime: 300,
+        config: {}
+      };
+    },
+    watch: {
+      show: {
+        handler(newVal) {
+          if (newVal) {
+            this.open();
+          } else {
+            if (this.isShow) {
+              this.close();
+            }
+          }
+        },
+        immediate: true
+      }
+    },
+    computed: {
+      // 初始化动画条件
+      transformStyles() {
+        const style = {
+          transform: this.transform,
+          opacity: this.opacity,
+          ...this.$uv.addStyle(this.customStyle),
+          "transition-duration": `${this.duration / 1e3}s`
+        };
+        return this.$uv.addStyle(style, "string");
+      }
+    },
+    created() {
+      this.config = {
+        duration: this.duration,
+        timingFunction: this.timingFunction,
+        transformOrigin: "50% 50%",
+        delay: 0
+      };
+      this.durationTime = this.duration;
+    },
+    methods: {
+      /**
+       *  ref 触发 初始化动画
+       */
+      init(obj = {}) {
+        if (obj.duration) {
+          this.durationTime = obj.duration;
+        }
+        this.animation = createAnimation(Object.assign(this.config, obj), this);
+      },
+      /**
+       * 点击组件触发回调
+       */
+      onClick() {
+        this.$emit("click", {
+          detail: this.isShow
+        });
+      },
+      /**
+       * ref 触发 动画分组
+       * @param {Object} obj
+       */
+      step(obj, config = {}) {
+        if (!this.animation)
+          return;
+        for (let i2 in obj) {
+          try {
+            if (typeof obj[i2] === "object") {
+              this.animation[i2](...obj[i2]);
+            } else {
+              this.animation[i2](obj[i2]);
+            }
+          } catch (e2) {
+            formatAppLog("error", "at uni_modules/uv-transition/components/uv-transition/uv-transition.vue:166", `方法 ${i2} 不存在`);
+          }
+        }
+        this.animation.step(config);
+        return this;
+      },
+      /**
+       *  ref 触发 执行动画
+       */
+      run(fn) {
+        if (!this.animation)
+          return;
+        this.animation.run(fn);
+      },
+      // 开始过度动画
+      open() {
+        clearTimeout(this.timer);
+        this.transform = "";
+        this.isShow = true;
+        let { opacity, transform } = this.styleInit(false);
+        if (typeof opacity !== "undefined") {
+          this.opacity = opacity;
+        }
+        this.transform = transform;
+        this.$nextTick(() => {
+          this.timer = setTimeout(() => {
+            this.animation = createAnimation(this.config, this);
+            this.tranfromInit(false).step();
+            this.animation.run();
+            this.$emit("change", {
+              detail: this.isShow
+            });
+          }, 20);
+        });
+      },
+      // 关闭过渡动画
+      close(type2) {
+        if (!this.animation)
+          return;
+        this.tranfromInit(true).step().run(() => {
+          this.isShow = false;
+          this.animationData = null;
+          this.animation = null;
+          let { opacity, transform } = this.styleInit(false);
+          this.opacity = opacity || 1;
+          this.transform = transform;
+          this.$emit("change", {
+            detail: this.isShow
+          });
+        });
+      },
+      // 处理动画开始前的默认样式
+      styleInit(type2) {
+        let styles = {
+          transform: ""
+        };
+        let buildStyle = (type3, mode) => {
+          if (mode === "fade") {
+            styles.opacity = this.animationType(type3)[mode];
+          } else {
+            styles.transform += this.animationType(type3)[mode] + " ";
+          }
+        };
+        if (typeof this.mode === "string") {
+          buildStyle(type2, this.mode);
+        } else {
+          this.mode.forEach((mode) => {
+            buildStyle(type2, mode);
+          });
+        }
+        return styles;
+      },
+      // 处理内置组合动画
+      tranfromInit(type2) {
+        let buildTranfrom = (type3, mode) => {
+          let aniNum = null;
+          if (mode === "fade") {
+            aniNum = type3 ? 0 : 1;
+          } else {
+            aniNum = type3 ? "-100%" : "0";
+            if (mode === "zoom-in") {
+              aniNum = type3 ? 0.8 : 1;
+            }
+            if (mode === "zoom-out") {
+              aniNum = type3 ? 1.2 : 1;
+            }
+            if (mode === "slide-right") {
+              aniNum = type3 ? "100%" : "0";
+            }
+            if (mode === "slide-bottom") {
+              aniNum = type3 ? "100%" : "0";
+            }
+          }
+          this.animation[this.animationMode()[mode]](aniNum);
+        };
+        if (typeof this.mode === "string") {
+          buildTranfrom(type2, this.mode);
+        } else {
+          this.mode.forEach((mode) => {
+            buildTranfrom(type2, mode);
+          });
+        }
+        return this.animation;
+      },
+      animationType(type2) {
+        return {
+          fade: type2 ? 1 : 0,
+          "slide-top": `translateY(${type2 ? "0" : "-100%"})`,
+          "slide-right": `translateX(${type2 ? "0" : "100%"})`,
+          "slide-bottom": `translateY(${type2 ? "0" : "100%"})`,
+          "slide-left": `translateX(${type2 ? "0" : "-100%"})`,
+          "zoom-in": `scaleX(${type2 ? 1 : 0.8}) scaleY(${type2 ? 1 : 0.8})`,
+          "zoom-out": `scaleX(${type2 ? 1 : 1.2}) scaleY(${type2 ? 1 : 1.2})`
+        };
+      },
+      // 内置动画类型与实际动画对应字典
+      animationMode() {
+        return {
+          fade: "opacity",
+          "slide-top": "translateY",
+          "slide-right": "translateX",
+          "slide-bottom": "translateY",
+          "slide-left": "translateX",
+          "zoom-in": "scale",
+          "zoom-out": "scale"
+        };
+      },
+      // 驼峰转中横线
+      toLine(name) {
+        return name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      }
+    }
+  };
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+    return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
+      key: 0,
+      ref: "ani",
+      animation: $data.animationData,
+      class: vue.normalizeClass($props.customClass),
+      style: vue.normalizeStyle($options.transformStyles),
+      onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      vue.renderSlot(_ctx.$slots, "default")
+    ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
+  }
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-transition/components/uv-transition/uv-transition.vue"]]);
+  const props$4 = {
+    props: {
+      color: {
+        type: String,
+        default: "#d6d7d9"
+      },
+      // 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带px单位的值等
+      length: {
+        type: [String, Number],
+        default: "100%"
+      },
+      // 线条方向，col-竖向，row-横向
+      direction: {
+        type: String,
+        default: "row"
+      },
+      // 是否显示细边框
+      hairline: {
+        type: Boolean,
+        default: true
+      },
+      // 线条与上下左右元素的间距，字符串形式，如"30px"、"20px 30px"
+      margin: {
+        type: [String, Number],
+        default: 0
+      },
+      // 是否虚线，true-虚线，false-实线
+      dashed: {
+        type: Boolean,
+        default: false
+      },
+      ...(_p = (_o = uni.$uv) == null ? void 0 : _o.props) == null ? void 0 : _p.line
+    }
+  };
+  const _sfc_main$7 = {
+    name: "uv-line",
+    mixins: [mpMixin, mixin, props$4],
+    computed: {
+      lineStyle() {
+        const style = {};
+        style.margin = this.margin;
+        if (this.direction === "row") {
+          style.borderBottomWidth = "1px";
+          style.borderBottomStyle = this.dashed ? "dashed" : "solid";
+          style.width = this.$uv.addUnit(this.length);
+          if (this.hairline)
+            style.transform = "scaleY(0.5)";
+        } else {
+          style.borderLeftWidth = "1px";
+          style.borderLeftStyle = this.dashed ? "dashed" : "solid";
+          style.height = this.$uv.addUnit(this.length);
+          if (this.hairline)
+            style.transform = "scaleX(0.5)";
+        }
+        style.borderColor = this.color;
+        return this.$uv.deepMerge(style, this.$uv.addStyle(this.customStyle));
+      }
+    }
+  };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "uv-line",
+        style: vue.normalizeStyle([$options.lineStyle])
+      },
+      null,
+      4
+      /* STYLE */
+    );
+  }
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-dcf8cb8f"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-line/components/uv-line/uv-line.vue"]]);
+  const props$3 = {
+    props: {
+      // input的label提示语
+      label: {
+        type: String,
+        default: ""
+      },
+      // 绑定的值
+      prop: {
+        type: String,
+        default: ""
+      },
+      // 是否显示表单域的下划线边框
+      borderBottom: {
+        type: [Boolean],
+        default: false
+      },
+      // label的位置，left-左边，top-上边
+      labelPosition: {
+        type: String,
+        default: ""
+      },
+      // label的宽度，单位px
+      labelWidth: {
+        type: [String, Number],
+        default: ""
+      },
+      // 右侧图标
+      rightIcon: {
+        type: String,
+        default: ""
+      },
+      // 左侧图标
+      leftIcon: {
+        type: String,
+        default: ""
+      },
+      // 是否显示左边的必填星号，只作显示用，具体校验必填的逻辑，请在rules中配置
+      required: {
+        type: Boolean,
+        default: false
+      },
+      leftIconStyle: {
+        type: [String, Object],
+        default: ""
+      },
+      ...(_r = (_q = uni.$uv) == null ? void 0 : _q.props) == null ? void 0 : _r.formItem
+    }
+  };
+  const _sfc_main$6 = {
+    name: "uv-form-item",
+    emits: ["click"],
+    mixins: [mpMixin, mixin, props$3],
+    data() {
+      return {
+        // 错误提示语
+        message: "",
+        parentData: {
+          // 提示文本的位置
+          labelPosition: "left",
+          // 提示文本对齐方式
+          labelAlign: "left",
+          // 提示文本的样式
+          labelStyle: {},
+          // 提示文本的宽度
+          labelWidth: 45,
+          // 错误提示方式
+          errorType: "message"
+        }
+      };
+    },
+    created() {
+      this.init();
+    },
+    methods: {
+      init() {
+        this.updateParentData();
+        if (!this.parent) {
+          this.$uv.error("uv-form-item需要结合uv-form组件使用");
+        }
+      },
+      // 获取父组件的参数
+      updateParentData() {
+        this.getParentData("uv-form");
+      },
+      // 移除uv-form-item的校验结果
+      clearValidate() {
+        this.message = null;
+      },
+      // 清空当前的组件的校验结果，并重置为初始值
+      resetField() {
+        const value = this.$uv.getProperty(this.parent.originalModel, this.prop);
+        this.$uv.setProperty(this.parent.model, this.prop, value);
+        this.message = null;
+      },
+      // 点击组件
+      clickHandler() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_icon = resolveEasycom(vue.resolveDynamicComponent("uv-icon"), __easycom_1$5);
+    const _component_uv_transition = resolveEasycom(vue.resolveDynamicComponent("uv-transition"), __easycom_1$1);
+    const _component_uv_line = resolveEasycom(vue.resolveDynamicComponent("uv-line"), __easycom_2$1);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uv-form-item" }, [
+      vue.createElementVNode(
+        "view",
+        {
+          class: "uv-form-item__body",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.clickHandler && $options.clickHandler(...args)),
+          style: vue.normalizeStyle([_ctx.$uv.addStyle(_ctx.customStyle), {
+            flexDirection: (_ctx.labelPosition || $data.parentData.labelPosition) === "left" ? "row" : "column"
+          }])
+        },
+        [
+          vue.createCommentVNode(' 微信小程序中，将一个参数设置空字符串，结果会变成字符串"true" '),
+          vue.renderSlot(_ctx.$slots, "label", {}, () => [
+            _ctx.required || _ctx.leftIcon || _ctx.label ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 0,
+                class: "uv-form-item__body__left",
+                style: vue.normalizeStyle({
+                  width: _ctx.$uv.addUnit(_ctx.labelWidth || $data.parentData.labelWidth),
+                  marginBottom: $data.parentData.labelPosition === "left" ? 0 : "5px"
+                })
+              },
+              [
+                vue.createCommentVNode(" 为了块对齐 "),
+                vue.createElementVNode("view", { class: "uv-form-item__body__left__content" }, [
+                  vue.createCommentVNode(" nvue不支持伪元素before "),
+                  _ctx.required ? (vue.openBlock(), vue.createElementBlock("text", {
+                    key: 0,
+                    class: "uv-form-item__body__left__content__required"
+                  }, "*")) : vue.createCommentVNode("v-if", true),
+                  _ctx.leftIcon ? (vue.openBlock(), vue.createElementBlock("view", {
+                    key: 1,
+                    class: "uv-form-item__body__left__content__icon"
+                  }, [
+                    vue.createVNode(_component_uv_icon, {
+                      name: _ctx.leftIcon,
+                      "custom-style": _ctx.leftIconStyle
+                    }, null, 8, ["name", "custom-style"])
+                  ])) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode(
+                    "text",
+                    {
+                      class: "uv-form-item__body__left__content__label",
+                      style: vue.normalizeStyle([$data.parentData.labelStyle, {
+                        justifyContent: $data.parentData.labelAlign === "left" ? "flex-start" : $data.parentData.labelAlign === "center" ? "center" : "flex-end"
+                      }])
+                    },
+                    vue.toDisplayString(_ctx.label),
+                    5
+                    /* TEXT, STYLE */
+                  )
+                ])
+              ],
+              4
+              /* STYLE */
+            )) : vue.createCommentVNode("v-if", true)
+          ], true),
+          vue.createElementVNode("view", { class: "uv-form-item__body__right" }, [
+            vue.createElementVNode("view", { class: "uv-form-item__body__right__content" }, [
+              vue.createElementVNode("view", { class: "uv-form-item__body__right__content__slot" }, [
+                vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+              ]),
+              vue.createElementVNode("view", { class: "item__body__right__content__icon" }, [
+                vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+              ])
+            ])
+          ])
+        ],
+        4
+        /* STYLE */
+      ),
+      vue.renderSlot(_ctx.$slots, "error", {}, () => [
+        !!$data.message && $data.parentData.errorType === "message" ? (vue.openBlock(), vue.createBlock(_component_uv_transition, {
+          key: 0,
+          show: true,
+          duration: 100,
+          mode: "fade"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createElementVNode(
+              "text",
+              {
+                class: "uv-form-item__body__right__message",
+                style: vue.normalizeStyle({
+                  marginLeft: _ctx.$uv.addUnit($data.parentData.labelPosition === "top" ? 0 : _ctx.labelWidth || $data.parentData.labelWidth)
+                })
+              },
+              vue.toDisplayString($data.message),
+              5
+              /* TEXT, STYLE */
+            )
+          ]),
+          _: 1
+          /* STABLE */
+        })) : vue.createCommentVNode("v-if", true)
+      ], true),
+      _ctx.borderBottom ? (vue.openBlock(), vue.createBlock(_component_uv_line, {
+        key: 0,
+        color: $data.message && $data.parentData.errorType === "border-bottom" ? "#f56c6c" : "#d6d7d9"
+      }, null, 8, ["color"])) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-d1e73275"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-form/components/uv-form-item/uv-form-item.vue"]]);
+  function colorGradient(startColor = "rgb(0, 0, 0)", endColor = "rgb(255, 255, 255)", step = 10) {
+    const startRGB = hexToRgb(startColor, false);
+    const startR = startRGB[0];
+    const startG = startRGB[1];
+    const startB = startRGB[2];
+    const endRGB = hexToRgb(endColor, false);
+    const endR = endRGB[0];
+    const endG = endRGB[1];
+    const endB = endRGB[2];
+    const sR = (endR - startR) / step;
+    const sG = (endG - startG) / step;
+    const sB = (endB - startB) / step;
+    const colorArr = [];
+    for (let i2 = 0; i2 < step; i2++) {
+      let hex = rgbToHex(`rgb(${Math.round(sR * i2 + startR)},${Math.round(sG * i2 + startG)},${Math.round(sB * i2 + startB)})`);
+      if (i2 === 0)
+        hex = rgbToHex(startColor);
+      if (i2 === step - 1)
+        hex = rgbToHex(endColor);
+      colorArr.push(hex);
+    }
+    return colorArr;
+  }
+  function hexToRgb(sColor, str = true) {
+    const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    sColor = String(sColor).toLowerCase();
+    if (sColor && reg.test(sColor)) {
+      if (sColor.length === 4) {
+        let sColorNew = "#";
+        for (let i2 = 1; i2 < 4; i2 += 1) {
+          sColorNew += sColor.slice(i2, i2 + 1).concat(sColor.slice(i2, i2 + 1));
+        }
+        sColor = sColorNew;
+      }
+      const sColorChange = [];
+      for (let i2 = 1; i2 < 7; i2 += 2) {
+        sColorChange.push(parseInt(`0x${sColor.slice(i2, i2 + 2)}`));
+      }
+      if (!str) {
+        return sColorChange;
+      }
+      return `rgb(${sColorChange[0]},${sColorChange[1]},${sColorChange[2]})`;
+    }
+    if (/^(rgb|RGB)/.test(sColor)) {
+      const arr = sColor.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
+      return arr.map((val) => Number(val));
+    }
+    return sColor;
+  }
+  function rgbToHex(rgb) {
+    const _this = rgb;
+    const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    if (/^(rgb|RGB)/.test(_this)) {
+      const aColor = _this.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
+      let strHex = "#";
+      for (let i2 = 0; i2 < aColor.length; i2++) {
+        let hex = Number(aColor[i2]).toString(16);
+        hex = String(hex).length == 1 ? `${0}${hex}` : hex;
+        if (hex === "0") {
+          hex += hex;
+        }
+        strHex += hex;
+      }
+      if (strHex.length !== 7) {
+        strHex = _this;
+      }
+      return strHex;
+    }
+    if (reg.test(_this)) {
+      const aNum = _this.replace(/#/, "").split("");
+      if (aNum.length === 6) {
+        return _this;
+      }
+      if (aNum.length === 3) {
+        let numHex = "#";
+        for (let i2 = 0; i2 < aNum.length; i2 += 1) {
+          numHex += aNum[i2] + aNum[i2];
+        }
+        return numHex;
+      }
+    } else {
+      return _this;
+    }
+  }
+  const props$2 = {
+    props: {
+      // 是否显示组件
+      show: {
+        type: Boolean,
+        default: true
+      },
+      // 颜色
+      color: {
+        type: String,
+        default: "#909193"
+      },
+      // 提示文字颜色
+      textColor: {
+        type: String,
+        default: "#909193"
+      },
+      // 文字和图标是否垂直排列
+      vertical: {
+        type: Boolean,
+        default: false
+      },
+      // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
+      mode: {
+        type: String,
+        default: "spinner"
+      },
+      // 图标大小，单位默认px
+      size: {
+        type: [String, Number],
+        default: 24
+      },
+      // 文字大小
+      textSize: {
+        type: [String, Number],
+        default: 15
+      },
+      // 文字样式
+      textStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      // 文字内容
+      text: {
+        type: [String, Number],
+        default: ""
+      },
+      // 动画模式 https://www.runoob.com/cssref/css3-pr-animation-timing-function.html
+      timingFunction: {
+        type: String,
+        default: "linear"
+      },
+      // 动画执行周期时间
+      duration: {
+        type: [String, Number],
+        default: 1200
+      },
+      // mode=circle时的暗边颜色
+      inactiveColor: {
+        type: String,
+        default: ""
+      },
+      ...(_t2 = (_s2 = uni.$uv) == null ? void 0 : _s2.props) == null ? void 0 : _t2.loadingIcon
+    }
+  };
+  const _sfc_main$5 = {
+    name: "uv-loading-icon",
+    mixins: [mpMixin, mixin, props$2],
+    data() {
+      return {
+        // Array.form可以通过一个伪数组对象创建指定长度的数组
+        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+        array12: Array.from({
+          length: 12
+        }),
+        // 这里需要设置默认值为360，否则在安卓nvue上，会延迟一个duration周期后才执行
+        // 在iOS nvue上，则会一开始默认执行两个周期的动画
+        aniAngel: 360,
+        // 动画旋转角度
+        webviewHide: false,
+        // 监听webview的状态，如果隐藏了页面，则停止动画，以免性能消耗
+        loading: false
+        // 是否运行中，针对nvue使用
+      };
+    },
+    computed: {
+      // 当为circle类型时，给其另外三边设置一个更轻一些的颜色
+      // 之所以需要这么做的原因是，比如父组件传了color为红色，那么需要另外的三个边为浅红色
+      // 而不能是固定的某一个其他颜色(因为这个固定的颜色可能浅蓝，导致效果没有那么细腻良好)
+      otherBorderColor() {
+        const lightColor = colorGradient(this.color, "#ffffff", 100)[80];
+        if (this.mode === "circle") {
+          return this.inactiveColor ? this.inactiveColor : lightColor;
+        } else {
+          return "transparent";
+        }
+      }
+    },
+    watch: {
+      show(n2) {
+      }
+    },
+    mounted() {
+      this.init();
+    },
+    methods: {
+      init() {
+        setTimeout(() => {
+          this.show && this.addEventListenerToWebview();
+        }, 20);
+      },
+      // 监听webview的显示与隐藏
+      addEventListenerToWebview() {
+        const pages2 = getCurrentPages();
+        const page2 = pages2[pages2.length - 1];
+        const currentWebview = page2.$getAppWebview();
+        currentWebview.addEventListener("hide", () => {
+          this.webviewHide = true;
+        });
+        currentWebview.addEventListener("show", () => {
+          this.webviewHide = false;
+        });
+      }
+    }
+  };
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return _ctx.show ? (vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        key: 0,
+        class: vue.normalizeClass(["uv-loading-icon", [_ctx.vertical && "uv-loading-icon--vertical"]]),
+        style: vue.normalizeStyle([_ctx.$uv.addStyle(_ctx.customStyle)])
+      },
+      [
+        !$data.webviewHide ? (vue.openBlock(), vue.createElementBlock(
+          "view",
+          {
+            key: 0,
+            class: vue.normalizeClass(["uv-loading-icon__spinner", [`uv-loading-icon__spinner--${_ctx.mode}`]]),
+            ref: "ani",
+            style: vue.normalizeStyle({
+              color: _ctx.color,
+              width: _ctx.$uv.addUnit(_ctx.size),
+              height: _ctx.$uv.addUnit(_ctx.size),
+              borderTopColor: _ctx.color,
+              borderBottomColor: $options.otherBorderColor,
+              borderLeftColor: $options.otherBorderColor,
+              borderRightColor: $options.otherBorderColor,
+              "animation-duration": `${_ctx.duration}ms`,
+              "animation-timing-function": _ctx.mode === "semicircle" || _ctx.mode === "circle" ? _ctx.timingFunction : ""
+            })
+          },
+          [
+            _ctx.mode === "spinner" ? (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              { key: 0 },
+              vue.renderList($data.array12, (item, index2) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  key: index2,
+                  class: "uv-loading-icon__dot"
+                });
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            )) : vue.createCommentVNode("v-if", true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )) : vue.createCommentVNode("v-if", true),
+        _ctx.text ? (vue.openBlock(), vue.createElementBlock(
+          "text",
+          {
+            key: 1,
+            class: "uv-loading-icon__text",
+            style: vue.normalizeStyle([{
+              fontSize: _ctx.$uv.addUnit(_ctx.textSize),
+              color: _ctx.textColor
+            }, _ctx.$uv.addStyle(_ctx.textStyle)])
+          },
+          vue.toDisplayString(_ctx.text),
+          5
+          /* TEXT, STYLE */
+        )) : vue.createCommentVNode("v-if", true)
+      ],
+      6
+      /* CLASS, STYLE */
+    )) : vue.createCommentVNode("v-if", true);
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-29b619ea"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-loading-icon/components/uv-loading-icon/uv-loading-icon.vue"]]);
+  const props$1 = {
+    props: {
+      // 是否细边框
+      hairline: {
+        type: Boolean,
+        default: true
+      },
+      // 按钮的预置样式，info，primary，error，warning，success
+      type: {
+        type: String,
+        default: "info"
+      },
+      // 按钮尺寸，large，normal，small，mini
+      size: {
+        type: String,
+        default: "normal"
+      },
+      // 按钮形状，circle（两边为半圆），square（带圆角）
+      shape: {
+        type: String,
+        default: "square"
+      },
+      // 按钮是否镂空
+      plain: {
+        type: Boolean,
+        default: false
+      },
+      // 是否禁止状态
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      // 是否加载中
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      // 加载中提示文字
+      loadingText: {
+        type: [String, Number],
+        default: ""
+      },
+      // 加载状态图标类型
+      loadingMode: {
+        type: String,
+        default: "spinner"
+      },
+      // 加载图标大小
+      loadingSize: {
+        type: [String, Number],
+        default: 14
+      },
+      // 开放能力，具体请看uniapp稳定关于button组件部分说明
+      // https://uniapp.dcloud.io/component/button
+      openType: {
+        type: String,
+        default: ""
+      },
+      // 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
+      // 取值为submit（提交表单），reset（重置表单）
+      formType: {
+        type: String,
+        default: ""
+      },
+      // 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
+      // 只微信小程序、QQ小程序有效
+      appParameter: {
+        type: String,
+        default: ""
+      },
+      // 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效
+      hoverStopPropagation: {
+        type: Boolean,
+        default: true
+      },
+      // 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。只微信小程序有效
+      lang: {
+        type: String,
+        default: "en"
+      },
+      // 会话来源，open-type="contact"时有效。只微信小程序有效
+      sessionFrom: {
+        type: String,
+        default: ""
+      },
+      // 会话内消息卡片标题，open-type="contact"时有效
+      // 默认当前标题，只微信小程序有效
+      sendMessageTitle: {
+        type: String,
+        default: ""
+      },
+      // 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效
+      // 默认当前分享路径，只微信小程序有效
+      sendMessagePath: {
+        type: String,
+        default: ""
+      },
+      // 会话内消息卡片图片，open-type="contact"时有效
+      // 默认当前页面截图，只微信小程序有效
+      sendMessageImg: {
+        type: String,
+        default: ""
+      },
+      // 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，
+      // 用户点击后可以快速发送小程序消息，open-type="contact"时有效
+      showMessageCard: {
+        type: Boolean,
+        default: true
+      },
+      // 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
+      dataName: {
+        type: String,
+        default: ""
+      },
+      // 节流，一定时间内只能触发一次
+      throttleTime: {
+        type: [String, Number],
+        default: 0
+      },
+      // 按住后多久出现点击态，单位毫秒
+      hoverStartTime: {
+        type: [String, Number],
+        default: 0
+      },
+      // 手指松开后点击态保留时间，单位毫秒
+      hoverStayTime: {
+        type: [String, Number],
+        default: 200
+      },
+      // 按钮文字，之所以通过props传入，是因为slot传入的话
+      // nvue中无法控制文字的样式
+      text: {
+        type: [String, Number],
+        default: ""
+      },
+      // 按钮图标
+      icon: {
+        type: String,
+        default: ""
+      },
+      // 按钮图标大小
+      iconSize: {
+        type: [String, Number],
+        default: ""
+      },
+      // 按钮图标颜色
+      iconColor: {
+        type: String,
+        default: "#000000"
+      },
+      // 按钮颜色，支持传入linear-gradient渐变色
+      color: {
+        type: String,
+        default: ""
+      },
+      // 自定义按钮文本样式
+      customTextStyle: {
+        type: [Object, String],
+        default: ""
+      },
+      ...(_v = (_u = uni.$uv) == null ? void 0 : _u.props) == null ? void 0 : _v.button
+    }
+  };
+  const _sfc_main$4 = {
+    name: "uv-button",
+    mixins: [mpMixin, mixin, props$1],
+    emits: ["click"],
+    data() {
+      return {};
+    },
+    computed: {
+      // 生成bem风格的类名
+      bemClass() {
+        if (!this.color) {
+          return this.bem(
+            "button",
+            ["type", "shape", "size"],
+            ["disabled", "plain", "hairline"]
+          );
+        } else {
+          return this.bem(
+            "button",
+            ["shape", "size"],
+            ["disabled", "plain", "hairline"]
+          );
+        }
+      },
+      loadingColor() {
+        if (this.plain) {
+          return this.color ? this.color : "#3c9cff";
+        }
+        if (this.type === "info") {
+          return "#c9c9c9";
+        }
+        return "rgb(200, 200, 200)";
+      },
+      iconColorCom() {
+        if (this.iconColor)
+          return this.iconColor;
+        if (this.plain) {
+          return this.color ? this.color : this.type;
+        } else {
+          return this.type === "info" ? "#000000" : "#ffffff";
+        }
+      },
+      baseColor() {
+        let style = {};
+        if (this.color) {
+          style.color = this.plain ? this.color : "white";
+          if (!this.plain) {
+            style["background-color"] = this.color;
+          }
+          if (this.color.indexOf("gradient") !== -1) {
+            style.borderTopWidth = 0;
+            style.borderRightWidth = 0;
+            style.borderBottomWidth = 0;
+            style.borderLeftWidth = 0;
+            if (!this.plain) {
+              style.backgroundImage = this.color;
+            }
+          } else {
+            style.borderColor = this.color;
+            style.borderWidth = "1px";
+            style.borderStyle = "solid";
+          }
+        }
+        return style;
+      },
+      // nvue版本按钮的字体不会继承父组件的颜色，需要对每一个text组件进行单独的设置
+      nvueTextStyle() {
+        let style = {};
+        if (this.type === "info") {
+          style.color = "#323233";
+        }
+        if (this.color) {
+          style.color = this.plain ? this.color : "white";
+        }
+        style.fontSize = this.textSize + "px";
+        return style;
+      },
+      // 字体大小
+      textSize() {
+        let fontSize = 14, { size } = this;
+        if (size === "large")
+          fontSize = 16;
+        if (size === "normal")
+          fontSize = 14;
+        if (size === "small")
+          fontSize = 12;
+        if (size === "mini")
+          fontSize = 10;
+        return fontSize;
+      },
+      // 设置图标大小
+      getIconSize() {
+        const size = this.iconSize ? this.iconSize : this.textSize * 1.35;
+        return this.$uv.addUnit(size);
+      },
+      // 设置外层盒子的宽度，其他样式不需要
+      btnWrapperStyle() {
+        const style = {};
+        const customStyle = this.$uv.addStyle(this.customStyle);
+        if (customStyle.width)
+          style.width = customStyle.width;
+        return style;
+      }
+    },
+    methods: {
+      clickHandler() {
+        if (!this.disabled && !this.loading) {
+          throttle(() => {
+            this.$emit("click");
+          }, this.throttleTime);
+        }
+      }
+    }
+  };
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_loading_icon = resolveEasycom(vue.resolveDynamicComponent("uv-loading-icon"), __easycom_0);
+    const _component_uv_icon = resolveEasycom(vue.resolveDynamicComponent("uv-icon"), __easycom_1$5);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: "uv-button-wrapper",
+        style: vue.normalizeStyle([$options.btnWrapperStyle])
+      },
+      [
+        vue.createElementVNode("button", {
+          "hover-start-time": Number(_ctx.hoverStartTime),
+          "hover-stay-time": Number(_ctx.hoverStayTime),
+          "form-type": _ctx.formType,
+          "open-type": _ctx.openType,
+          "app-parameter": _ctx.appParameter,
+          "hover-stop-propagation": _ctx.hoverStopPropagation,
+          "send-message-title": _ctx.sendMessageTitle,
+          "send-message-path": _ctx.sendMessagePath,
+          lang: _ctx.lang,
+          "data-name": _ctx.dataName,
+          "session-from": _ctx.sessionFrom,
+          "send-message-img": _ctx.sendMessageImg,
+          "show-message-card": _ctx.showMessageCard,
+          "hover-class": !_ctx.disabled && !_ctx.loading ? "uv-button--active" : "",
+          class: vue.normalizeClass(["uv-button uv-reset-button", $options.bemClass]),
+          style: vue.normalizeStyle([$options.baseColor, _ctx.$uv.addStyle(_ctx.customStyle)]),
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.clickHandler && $options.clickHandler(...args))
+        }, [
+          _ctx.loading ? (vue.openBlock(), vue.createElementBlock(
+            vue.Fragment,
+            { key: 0 },
+            [
+              vue.createVNode(_component_uv_loading_icon, {
+                mode: _ctx.loadingMode,
+                size: _ctx.loadingSize * 1.15,
+                color: $options.loadingColor
+              }, null, 8, ["mode", "size", "color"]),
+              vue.createElementVNode(
+                "text",
+                {
+                  class: "uv-button__loading-text",
+                  style: vue.normalizeStyle([
+                    { fontSize: $options.textSize + "px" },
+                    _ctx.$uv.addStyle(_ctx.customTextStyle)
+                  ])
+                },
+                vue.toDisplayString(_ctx.loadingText || _ctx.text),
+                5
+                /* TEXT, STYLE */
+              )
+            ],
+            64
+            /* STABLE_FRAGMENT */
+          )) : (vue.openBlock(), vue.createElementBlock(
+            vue.Fragment,
+            { key: 1 },
+            [
+              _ctx.icon ? (vue.openBlock(), vue.createBlock(_component_uv_icon, {
+                key: 0,
+                name: _ctx.icon,
+                color: $options.iconColorCom,
+                size: $options.getIconSize,
+                customStyle: { marginRight: "2px" }
+              }, null, 8, ["name", "color", "size"])) : vue.createCommentVNode("v-if", true),
+              vue.renderSlot(_ctx.$slots, "default", {}, () => [
+                vue.createElementVNode(
+                  "text",
+                  {
+                    class: "uv-button__text",
+                    style: vue.normalizeStyle([
+                      { fontSize: $options.textSize + "px" },
+                      _ctx.$uv.addStyle(_ctx.customTextStyle)
+                    ])
+                  },
+                  vue.toDisplayString(_ctx.text),
+                  5
+                  /* TEXT, STYLE */
+                )
+              ], true),
+              vue.renderSlot(_ctx.$slots, "suffix", {}, void 0, true)
+            ],
+            64
+            /* STABLE_FRAGMENT */
+          ))
+        ], 14, ["hover-start-time", "hover-stay-time", "form-type", "open-type", "app-parameter", "hover-stop-propagation", "send-message-title", "send-message-path", "lang", "data-name", "session-from", "send-message-img", "show-message-card", "hover-class"])
+      ],
+      4
+      /* STYLE */
+    );
+  }
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-ae8e42c7"], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-button/components/uv-button/uv-button.vue"]]);
+  const props = {
+    props: {
+      // 当前form的需要验证字段的集合
+      model: {
+        type: Object,
+        default: () => ({})
+      },
+      // 验证规则
+      rules: {
+        type: [Object, Function, Array],
+        default: () => ({})
+      },
+      // 有错误时的提示方式，message-提示信息，toast-进行toast提示
+      // border-bottom-下边框呈现红色，none-无提示
+      errorType: {
+        type: String,
+        default: "message"
+      },
+      // 是否显示表单域的下划线边框
+      borderBottom: {
+        type: Boolean,
+        default: true
+      },
+      // label的位置，left-左边，top-上边
+      labelPosition: {
+        type: String,
+        default: "left"
+      },
+      // label的宽度，单位px
+      labelWidth: {
+        type: [String, Number],
+        default: 45
+      },
+      // lable字体的对齐方式
+      labelAlign: {
+        type: String,
+        default: "left"
+      },
+      // lable的样式，对象形式
+      labelStyle: {
+        type: Object,
+        default: () => ({})
+      },
+      ...(_x = (_w = uni.$uv) == null ? void 0 : _w.props) == null ? void 0 : _x.form
+    }
+  };
+  var define_process_env_default = {};
+  const formatRegExp = /%[sdj%]/g;
+  let warning = function warning2() {
+  };
+  if (typeof process !== "undefined" && define_process_env_default && true && typeof window !== "undefined" && typeof document !== "undefined") {
+    warning = function warning3(type2, errors) {
+      if (typeof console !== "undefined" && console.warn) {
+        if (errors.every((e2) => typeof e2 === "string")) {
+          formatAppLog("warn", "at uni_modules/uv-form/components/uv-form/valid.js:28", type2, errors);
+        }
+      }
+    };
+  }
+  function convertFieldsError(errors) {
+    if (!errors || !errors.length)
+      return null;
+    const fields = {};
+    errors.forEach((error2) => {
+      const { field } = error2;
+      fields[field] = fields[field] || [];
+      fields[field].push(error2);
+    });
+    return fields;
+  }
+  function format() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    let i2 = 1;
+    const f2 = args[0];
+    const len = args.length;
+    if (typeof f2 === "function") {
+      return f2.apply(null, args.slice(1));
+    }
+    if (typeof f2 === "string") {
+      let str = String(f2).replace(formatRegExp, (x) => {
+        if (x === "%%") {
+          return "%";
+        }
+        if (i2 >= len) {
+          return x;
+        }
+        switch (x) {
+          case "%s":
+            return String(args[i2++]);
+          case "%d":
+            return Number(args[i2++]);
+          case "%j":
+            try {
+              return JSON.stringify(args[i2++]);
+            } catch (_2) {
+              return "[Circular]";
+            }
+            break;
+          default:
+            return x;
+        }
+      });
+      for (let arg = args[i2]; i2 < len; arg = args[++i2]) {
+        str += ` ${arg}`;
+      }
+      return str;
+    }
+    return f2;
+  }
+  function isNativeStringType(type2) {
+    return type2 === "string" || type2 === "url" || type2 === "hex" || type2 === "email" || type2 === "pattern";
+  }
+  function isEmptyValue(value, type2) {
+    if (value === void 0 || value === null) {
+      return true;
+    }
+    if (type2 === "array" && Array.isArray(value) && !value.length) {
+      return true;
+    }
+    if (isNativeStringType(type2) && typeof value === "string" && !value) {
+      return true;
+    }
+    return false;
+  }
+  function asyncParallelArray(arr, func2, callback) {
+    const results = [];
+    let total = 0;
+    const arrLength = arr.length;
+    function count(errors) {
+      results.push.apply(results, errors);
+      total++;
+      if (total === arrLength) {
+        callback(results);
+      }
+    }
+    arr.forEach((a2) => {
+      func2(a2, count);
+    });
+  }
+  function asyncSerialArray(arr, func2, callback) {
+    let index2 = 0;
+    const arrLength = arr.length;
+    function next(errors) {
+      if (errors && errors.length) {
+        callback(errors);
+        return;
+      }
+      const original = index2;
+      index2 += 1;
+      if (original < arrLength) {
+        func2(arr[original], next);
+      } else {
+        callback([]);
+      }
+    }
+    next([]);
+  }
+  function flattenObjArr(objArr) {
+    const ret = [];
+    Object.keys(objArr).forEach((k) => {
+      ret.push.apply(ret, objArr[k]);
+    });
+    return ret;
+  }
+  function asyncMap(objArr, option, func2, callback) {
+    if (option.first) {
+      const _pending = new Promise((resolve, reject) => {
+        const next = function next2(errors) {
+          callback(errors);
+          return errors.length ? reject({
+            errors,
+            fields: convertFieldsError(errors)
+          }) : resolve();
+        };
+        const flattenArr = flattenObjArr(objArr);
+        asyncSerialArray(flattenArr, func2, next);
+      });
+      _pending.catch((e2) => e2);
+      return _pending;
+    }
+    let firstFields = option.firstFields || [];
+    if (firstFields === true) {
+      firstFields = Object.keys(objArr);
+    }
+    const objArrKeys = Object.keys(objArr);
+    const objArrLength = objArrKeys.length;
+    let total = 0;
+    const results = [];
+    const pending = new Promise((resolve, reject) => {
+      const next = function next2(errors) {
+        results.push.apply(results, errors);
+        total++;
+        if (total === objArrLength) {
+          callback(results);
+          return results.length ? reject({
+            errors: results,
+            fields: convertFieldsError(results)
+          }) : resolve();
+        }
+      };
+      if (!objArrKeys.length) {
+        callback(results);
+        resolve();
+      }
+      objArrKeys.forEach((key) => {
+        const arr = objArr[key];
+        if (firstFields.indexOf(key) !== -1) {
+          asyncSerialArray(arr, func2, next);
+        } else {
+          asyncParallelArray(arr, func2, next);
+        }
+      });
+    });
+    pending.catch((e2) => e2);
+    return pending;
+  }
+  function complementError(rule) {
+    return function(oe2) {
+      if (oe2 && oe2.message) {
+        oe2.field = oe2.field || rule.fullField;
+        return oe2;
+      }
+      return {
+        message: typeof oe2 === "function" ? oe2() : oe2,
+        field: oe2.field || rule.fullField
+      };
+    };
+  }
+  function deepMerge(target, source) {
+    if (source) {
+      for (const s2 in source) {
+        if (source.hasOwnProperty(s2)) {
+          const value = source[s2];
+          if (typeof value === "object" && typeof target[s2] === "object") {
+            target[s2] = { ...target[s2], ...value };
+          } else {
+            target[s2] = value;
+          }
+        }
+      }
+    }
+    return target;
+  }
+  function required(rule, value, source, errors, options, type2) {
+    if (rule.required && (!source.hasOwnProperty(rule.field) || isEmptyValue(value, type2 || rule.type))) {
+      errors.push(format(options.messages.required, rule.fullField));
+    }
+  }
+  function whitespace(rule, value, source, errors, options) {
+    if (/^\s+$/.test(value) || value === "") {
+      errors.push(format(options.messages.whitespace, rule.fullField));
+    }
+  }
+  const pattern = {
+    // http://emailregex.com/
+    email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    url: new RegExp(
+      "^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$",
+      "i"
+    ),
+    hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
+  };
+  var types = {
+    integer: function integer(value) {
+      return /^(-)?\d+$/.test(value);
+    },
+    float: function float(value) {
+      return /^(-)?\d+(\.\d+)?$/.test(value);
+    },
+    array: function array3(value) {
+      return Array.isArray(value);
+    },
+    regexp: function regexp(value) {
+      if (value instanceof RegExp) {
+        return true;
+      }
+      try {
+        return !!new RegExp(value);
+      } catch (e2) {
+        return false;
+      }
+    },
+    date: function date3(value) {
+      return typeof value.getTime === "function" && typeof value.getMonth === "function" && typeof value.getYear === "function";
+    },
+    number: function number3(value) {
+      if (isNaN(value)) {
+        return false;
+      }
+      return typeof +value === "number";
+    },
+    object: function object3(value) {
+      return typeof value === "object" && !types.array(value);
+    },
+    method: function method(value) {
+      return typeof value === "function";
+    },
+    email: function email2(value) {
+      return typeof value === "string" && !!value.match(pattern.email) && value.length < 255;
+    },
+    url: function url2(value) {
+      return typeof value === "string" && !!value.match(pattern.url);
+    },
+    hex: function hex(value) {
+      return typeof value === "string" && !!value.match(pattern.hex);
+    }
+  };
+  function type(rule, value, source, errors, options) {
+    if (rule.required && value === void 0) {
+      required(rule, value, source, errors, options);
+      return;
+    }
+    const custom = ["integer", "float", "array", "regexp", "object", "method", "email", "number", "date", "url", "hex"];
+    const ruleType = rule.type;
+    if (custom.indexOf(ruleType) > -1) {
+      if (!types[ruleType](value)) {
+        errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+      }
+    } else if (ruleType && typeof value !== rule.type) {
+      errors.push(format(options.messages.types[ruleType], rule.fullField, rule.type));
+    }
+  }
+  function range(rule, value, source, errors, options) {
+    const len = typeof rule.len === "number";
+    const min = typeof rule.min === "number";
+    const max = typeof rule.max === "number";
+    const spRegexp = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+    let val = value;
+    let key = null;
+    const num = typeof value === "number";
+    const str = typeof value === "string";
+    const arr = Array.isArray(value);
+    if (num) {
+      key = "number";
+    } else if (str) {
+      key = "string";
+    } else if (arr) {
+      key = "array";
+    }
+    if (!key) {
+      return false;
+    }
+    if (arr) {
+      val = value.length;
+    }
+    if (str) {
+      val = value.replace(spRegexp, "_").length;
+    }
+    if (len) {
+      if (val !== rule.len) {
+        errors.push(format(options.messages[key].len, rule.fullField, rule.len));
+      }
+    } else if (min && !max && val < rule.min) {
+      errors.push(format(options.messages[key].min, rule.fullField, rule.min));
+    } else if (max && !min && val > rule.max) {
+      errors.push(format(options.messages[key].max, rule.fullField, rule.max));
+    } else if (min && max && (val < rule.min || val > rule.max)) {
+      errors.push(format(options.messages[key].range, rule.fullField, rule.min, rule.max));
+    }
+  }
+  const ENUM = "enum";
+  function enumerable(rule, value, source, errors, options) {
+    rule[ENUM] = Array.isArray(rule[ENUM]) ? rule[ENUM] : [];
+    if (rule[ENUM].indexOf(value) === -1) {
+      errors.push(format(options.messages[ENUM], rule.fullField, rule[ENUM].join(", ")));
+    }
+  }
+  function pattern$1(rule, value, source, errors, options) {
+    if (rule.pattern) {
+      if (rule.pattern instanceof RegExp) {
+        rule.pattern.lastIndex = 0;
+        if (!rule.pattern.test(value)) {
+          errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+        }
+      } else if (typeof rule.pattern === "string") {
+        const _pattern = new RegExp(rule.pattern);
+        if (!_pattern.test(value)) {
+          errors.push(format(options.messages.pattern.mismatch, rule.fullField, value, rule.pattern));
+        }
+      }
+    }
+  }
+  const rules = {
+    required,
+    whitespace,
+    type,
+    range,
+    enum: enumerable,
+    pattern: pattern$1
+  };
+  function string(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value, "string") && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options, "string");
+      if (!isEmptyValue(value, "string")) {
+        rules.type(rule, value, source, errors, options);
+        rules.range(rule, value, source, errors, options);
+        rules.pattern(rule, value, source, errors, options);
+        if (rule.whitespace === true) {
+          rules.whitespace(rule, value, source, errors, options);
+        }
+      }
+    }
+    callback(errors);
+  }
+  function method2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function number2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (value === "") {
+        value = void 0;
+      }
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+        rules.range(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function _boolean(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function regexp2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (!isEmptyValue(value)) {
+        rules.type(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function integer2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+        rules.range(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function floatFn(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+        rules.range(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function array2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value, "array") && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options, "array");
+      if (!isEmptyValue(value, "array")) {
+        rules.type(rule, value, source, errors, options);
+        rules.range(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function object2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules.type(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  const ENUM$1 = "enum";
+  function enumerable$1(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (value !== void 0) {
+        rules[ENUM$1](rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function pattern$2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value, "string") && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (!isEmptyValue(value, "string")) {
+        rules.pattern(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function date2(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+      if (!isEmptyValue(value)) {
+        let dateObject;
+        if (typeof value === "number") {
+          dateObject = new Date(value);
+        } else {
+          dateObject = value;
+        }
+        rules.type(rule, dateObject, source, errors, options);
+        if (dateObject) {
+          rules.range(rule, dateObject.getTime(), source, errors, options);
+        }
+      }
+    }
+    callback(errors);
+  }
+  function required$1(rule, value, callback, source, options) {
+    const errors = [];
+    const type2 = Array.isArray(value) ? "array" : typeof value;
+    rules.required(rule, value, source, errors, options, type2);
+    callback(errors);
+  }
+  function type$1(rule, value, callback, source, options) {
+    const ruleType = rule.type;
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value, ruleType) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options, ruleType);
+      if (!isEmptyValue(value, ruleType)) {
+        rules.type(rule, value, source, errors, options);
+      }
+    }
+    callback(errors);
+  }
+  function any(rule, value, callback, source, options) {
+    const errors = [];
+    const validate2 = rule.required || !rule.required && source.hasOwnProperty(rule.field);
+    if (validate2) {
+      if (isEmptyValue(value) && !rule.required) {
+        return callback();
+      }
+      rules.required(rule, value, source, errors, options);
+    }
+    callback(errors);
+  }
+  const validators = {
+    string,
+    method: method2,
+    number: number2,
+    boolean: _boolean,
+    regexp: regexp2,
+    integer: integer2,
+    float: floatFn,
+    array: array2,
+    object: object2,
+    enum: enumerable$1,
+    pattern: pattern$2,
+    date: date2,
+    url: type$1,
+    hex: type$1,
+    email: type$1,
+    required: required$1,
+    any
+  };
+  function newMessages() {
+    return {
+      default: "Validation error on field %s",
+      required: "%s is required",
+      enum: "%s must be one of %s",
+      whitespace: "%s cannot be empty",
+      date: {
+        format: "%s date %s is invalid for format %s",
+        parse: "%s date could not be parsed, %s is invalid ",
+        invalid: "%s date %s is invalid"
+      },
+      types: {
+        string: "%s is not a %s",
+        method: "%s is not a %s (function)",
+        array: "%s is not an %s",
+        object: "%s is not an %s",
+        number: "%s is not a %s",
+        date: "%s is not a %s",
+        boolean: "%s is not a %s",
+        integer: "%s is not an %s",
+        float: "%s is not a %s",
+        regexp: "%s is not a valid %s",
+        email: "%s is not a valid %s",
+        url: "%s is not a valid %s",
+        hex: "%s is not a valid %s"
+      },
+      string: {
+        len: "%s must be exactly %s characters",
+        min: "%s must be at least %s characters",
+        max: "%s cannot be longer than %s characters",
+        range: "%s must be between %s and %s characters"
+      },
+      number: {
+        len: "%s must equal %s",
+        min: "%s cannot be less than %s",
+        max: "%s cannot be greater than %s",
+        range: "%s must be between %s and %s"
+      },
+      array: {
+        len: "%s must be exactly %s in length",
+        min: "%s cannot be less than %s in length",
+        max: "%s cannot be greater than %s in length",
+        range: "%s must be between %s and %s in length"
+      },
+      pattern: {
+        mismatch: "%s value %s does not match pattern %s"
+      },
+      clone: function clone() {
+        const cloned = JSON.parse(JSON.stringify(this));
+        cloned.clone = this.clone;
+        return cloned;
+      }
+    };
+  }
+  const messages = newMessages();
+  function Schema(descriptor) {
+    this.rules = null;
+    this._messages = messages;
+    this.define(descriptor);
+  }
+  Schema.prototype = {
+    messages: function messages2(_messages) {
+      if (_messages) {
+        this._messages = deepMerge(newMessages(), _messages);
+      }
+      return this._messages;
+    },
+    define: function define(rules2) {
+      if (!rules2) {
+        throw new Error("Cannot configure a schema with no rules");
+      }
+      if (typeof rules2 !== "object" || Array.isArray(rules2)) {
+        throw new Error("Rules must be an object");
+      }
+      this.rules = {};
+      let z2;
+      let item;
+      for (z2 in rules2) {
+        if (rules2.hasOwnProperty(z2)) {
+          item = rules2[z2];
+          this.rules[z2] = Array.isArray(item) ? item : [item];
+        }
+      }
+    },
+    validate: function validate(source_, o2, oc) {
+      const _this = this;
+      if (o2 === void 0) {
+        o2 = {};
+      }
+      if (oc === void 0) {
+        oc = function oc2() {
+        };
+      }
+      let source = source_;
+      let options = o2;
+      let callback = oc;
+      if (typeof options === "function") {
+        callback = options;
+        options = {};
+      }
+      if (!this.rules || Object.keys(this.rules).length === 0) {
+        if (callback) {
+          callback();
+        }
+        return Promise.resolve();
+      }
+      function complete(results) {
+        let i2;
+        let errors = [];
+        let fields = {};
+        function add(e2) {
+          if (Array.isArray(e2)) {
+            let _errors;
+            errors = (_errors = errors).concat.apply(_errors, e2);
+          } else {
+            errors.push(e2);
+          }
+        }
+        for (i2 = 0; i2 < results.length; i2++) {
+          add(results[i2]);
+        }
+        if (!errors.length) {
+          errors = null;
+          fields = null;
+        } else {
+          fields = convertFieldsError(errors);
+        }
+        callback(errors, fields);
+      }
+      if (options.messages) {
+        let messages$1 = this.messages();
+        if (messages$1 === messages) {
+          messages$1 = newMessages();
+        }
+        deepMerge(messages$1, options.messages);
+        options.messages = messages$1;
+      } else {
+        options.messages = this.messages();
+      }
+      let arr;
+      let value;
+      const series = {};
+      const keys = options.keys || Object.keys(this.rules);
+      keys.forEach((z2) => {
+        arr = _this.rules[z2];
+        value = source[z2];
+        arr.forEach((r2) => {
+          let rule = r2;
+          if (typeof rule.transform === "function") {
+            if (source === source_) {
+              source = { ...source };
+            }
+            value = source[z2] = rule.transform(value);
+          }
+          if (typeof rule === "function") {
+            rule = {
+              validator: rule
+            };
+          } else {
+            rule = { ...rule };
+          }
+          rule.validator = _this.getValidationMethod(rule);
+          rule.field = z2;
+          rule.fullField = rule.fullField || z2;
+          rule.type = _this.getType(rule);
+          if (!rule.validator) {
+            return;
+          }
+          series[z2] = series[z2] || [];
+          series[z2].push({
+            rule,
+            value,
+            source,
+            field: z2
+          });
+        });
+      });
+      const errorFields = {};
+      return asyncMap(series, options, (data, doIt) => {
+        const { rule } = data;
+        let deep = (rule.type === "object" || rule.type === "array") && (typeof rule.fields === "object" || typeof rule.defaultField === "object");
+        deep = deep && (rule.required || !rule.required && data.value);
+        rule.field = data.field;
+        function addFullfield(key, schema) {
+          return { ...schema, fullField: `${rule.fullField}.${key}` };
+        }
+        function cb(e2) {
+          if (e2 === void 0) {
+            e2 = [];
+          }
+          let errors = e2;
+          if (!Array.isArray(errors)) {
+            errors = [errors];
+          }
+          if (!options.suppressWarning && errors.length) {
+            Schema.warning("async-validator:", errors);
+          }
+          if (errors.length && rule.message) {
+            errors = [].concat(rule.message);
+          }
+          errors = errors.map(complementError(rule));
+          if (options.first && errors.length) {
+            errorFields[rule.field] = 1;
+            return doIt(errors);
+          }
+          if (!deep) {
+            doIt(errors);
+          } else {
+            if (rule.required && !data.value) {
+              if (rule.message) {
+                errors = [].concat(rule.message).map(complementError(rule));
+              } else if (options.error) {
+                errors = [options.error(rule, format(options.messages.required, rule.field))];
+              } else {
+                errors = [];
+              }
+              return doIt(errors);
+            }
+            let fieldsSchema = {};
+            if (rule.defaultField) {
+              for (const k in data.value) {
+                if (data.value.hasOwnProperty(k)) {
+                  fieldsSchema[k] = rule.defaultField;
+                }
+              }
+            }
+            fieldsSchema = { ...fieldsSchema, ...data.rule.fields };
+            for (const f2 in fieldsSchema) {
+              if (fieldsSchema.hasOwnProperty(f2)) {
+                const fieldSchema = Array.isArray(fieldsSchema[f2]) ? fieldsSchema[f2] : [fieldsSchema[f2]];
+                fieldsSchema[f2] = fieldSchema.map(addFullfield.bind(null, f2));
+              }
+            }
+            const schema = new Schema(fieldsSchema);
+            schema.messages(options.messages);
+            if (data.rule.options) {
+              data.rule.options.messages = options.messages;
+              data.rule.options.error = options.error;
+            }
+            schema.validate(data.value, data.rule.options || options, (errs) => {
+              const finalErrors = [];
+              if (errors && errors.length) {
+                finalErrors.push.apply(finalErrors, errors);
+              }
+              if (errs && errs.length) {
+                finalErrors.push.apply(finalErrors, errs);
+              }
+              doIt(finalErrors.length ? finalErrors : null);
+            });
+          }
+        }
+        let res;
+        if (rule.asyncValidator) {
+          res = rule.asyncValidator(rule, data.value, cb, data.source, options);
+        } else if (rule.validator) {
+          res = rule.validator(rule, data.value, cb, data.source, options);
+          if (res === true) {
+            cb();
+          } else if (res === false) {
+            cb(rule.message || `${rule.field} fails`);
+          } else if (res instanceof Array) {
+            cb(res);
+          } else if (res instanceof Error) {
+            cb(res.message);
+          }
+        }
+        if (res && res.then) {
+          res.then(() => cb(), (e2) => cb(e2));
+        }
+      }, (results) => {
+        complete(results);
+      });
+    },
+    getType: function getType(rule) {
+      if (rule.type === void 0 && rule.pattern instanceof RegExp) {
+        rule.type = "pattern";
+      }
+      if (typeof rule.validator !== "function" && rule.type && !validators.hasOwnProperty(rule.type)) {
+        throw new Error(format("Unknown rule type %s", rule.type));
+      }
+      return rule.type || "string";
+    },
+    getValidationMethod: function getValidationMethod(rule) {
+      if (typeof rule.validator === "function") {
+        return rule.validator;
+      }
+      const keys = Object.keys(rule);
+      const messageIndex = keys.indexOf("message");
+      if (messageIndex !== -1) {
+        keys.splice(messageIndex, 1);
+      }
+      if (keys.length === 1 && keys[0] === "required") {
+        return validators.required;
+      }
+      return validators[this.getType(rule)] || false;
+    }
+  };
+  Schema.register = function register(type2, validator) {
+    if (typeof validator !== "function") {
+      throw new Error("Cannot register a validator by type, validator is not a function");
+    }
+    validators[type2] = validator;
+  };
+  Schema.warning = warning;
+  Schema.messages = messages;
+  Schema.warning = function() {
+  };
+  const _sfc_main$3 = {
+    name: "uv-form",
+    mixins: [mpMixin, mixin, props],
+    provide() {
+      return {
+        uForm: this
+      };
+    },
+    data() {
+      return {
+        formRules: {},
+        // 规则校验器
+        validator: {},
+        // 原始的model快照，用于resetFields方法重置表单时使用
+        originalModel: null
+      };
+    },
+    watch: {
+      // 监听规则的变化
+      rules: {
+        immediate: true,
+        handler(n2) {
+          this.setRules(n2);
+        }
+      },
+      // 监听属性的变化，通知子组件uv-form-item重新获取信息
+      propsChange(n2) {
+        var _a;
+        if ((_a = this.children) == null ? void 0 : _a.length) {
+          this.children.map((child) => {
+            typeof child.updateParentData == "function" && child.updateParentData();
+          });
+        }
+      },
+      // 监听model的初始值作为重置表单的快照
+      model: {
+        immediate: true,
+        handler(n2) {
+          if (!this.originalModel) {
+            this.originalModel = this.$uv.deepClone(n2);
+          }
+        }
+      }
+    },
+    computed: {
+      propsChange() {
+        return [
+          this.errorType,
+          this.borderBottom,
+          this.labelPosition,
+          this.labelWidth,
+          this.labelAlign,
+          this.labelStyle
+        ];
+      }
+    },
+    created() {
+      this.children = [];
+    },
+    methods: {
+      // 手动设置校验的规则，如果规则中有函数的话，微信小程序中会过滤掉，所以只能手动调用设置规则
+      setRules(rules2) {
+        if (Object.keys(rules2).length === 0)
+          return;
+        if (Object.keys(this.model).length === 0) {
+          this.$uv.error("设置rules，model必须设置！如果已经设置，请刷新页面。");
+          return;
+        }
+        this.formRules = rules2;
+        this.validator = new Schema(rules2);
+      },
+      // 清空所有uv-form-item组件的内容，本质上是调用了uv-form-item组件中的resetField()方法
+      resetFields() {
+        this.resetModel();
+      },
+      // 重置model为初始值的快照
+      resetModel(obj) {
+        this.children.map((child) => {
+          const prop = child == null ? void 0 : child.prop;
+          const value = this.$uv.getProperty(this.originalModel, prop);
+          this.$uv.setProperty(this.model, prop, value);
+        });
+      },
+      // 清空校验结果
+      clearValidate(props2) {
+        props2 = [].concat(props2);
+        this.children.map((child) => {
+          if (props2[0] === void 0 || props2.includes(child.prop)) {
+            child.message = null;
+          }
+        });
+      },
+      // 对部分表单字段进行校验
+      async validateField(value, callback, event = null) {
+        this.$nextTick(() => {
+          const errorsRes = [];
+          value = [].concat(value);
+          this.children.map((child) => {
+            const childErrors = [];
+            if (value.includes(child.prop)) {
+              const propertyVal = this.$uv.getProperty(
+                this.model,
+                child.prop
+              );
+              const propertyChain = child.prop.split(".");
+              const propertyName = propertyChain[propertyChain.length - 1];
+              const rule = this.formRules[child.prop];
+              if (!rule)
+                return;
+              const rules2 = [].concat(rule);
+              for (let i2 = 0; i2 < rules2.length; i2++) {
+                const ruleItem = rules2[i2];
+                const trigger = [].concat(ruleItem == null ? void 0 : ruleItem.trigger);
+                if (event && !trigger.includes(event))
+                  continue;
+                const validator = new Schema({
+                  [propertyName]: ruleItem
+                });
+                validator.validate(
+                  {
+                    [propertyName]: propertyVal
+                  },
+                  (errors, fields) => {
+                    if (this.$uv.test.array(errors)) {
+                      errorsRes.push(...errors);
+                      childErrors.push(...errors);
+                    }
+                    this.$nextTick(() => {
+                      var _a, _b;
+                      child.message = ((_a = childErrors[0]) == null ? void 0 : _a.message) ? (_b = childErrors[0]) == null ? void 0 : _b.message : null;
+                    });
+                  }
+                );
+              }
+            }
+          });
+          typeof callback === "function" && callback(errorsRes);
+        });
+      },
+      // 校验全部数据
+      validate(callback) {
+        return new Promise((resolve, reject) => {
+          this.$nextTick(() => {
+            const formItemProps = this.children.map(
+              (item) => item.prop
+            );
+            this.validateField(formItemProps, (errors) => {
+              if (errors.length) {
+                this.errorType === "toast" && this.$uv.toast(errors[0].message);
+                reject(errors);
+              } else {
+                resolve(true);
+              }
+            });
+          });
+        });
+      }
+    }
+  };
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uv-form" }, [
+      vue.renderSlot(_ctx.$slots, "default")
+    ]);
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/uni_modules/uv-form/components/uv-form/uv-form.vue"]]);
   const _sfc_main$2 = {
-    __name: "login",
-    setup(__props) {
-      const goRegister = () => {
+    data() {
+      return {
+        loginModel: {
+          userInfo: {
+            name: "",
+            passward: ""
+          }
+        },
+        rules: {
+          "userInfo.name": [
+            {
+              required: true,
+              message: "账号不能为空",
+              trigger: ["blur", "change"]
+            },
+            {
+              validator(rule, value, callback) {
+                const reg = /^[1-9][0-9]{7}$/;
+                if (!reg.test(value)) {
+                  callback(new Error("账号必须是八位数字且首位不为0"));
+                } else {
+                  callback();
+                }
+              },
+              trigger: ["blur", "change"]
+            }
+          ],
+          "userInfo.passward": {
+            type: "string",
+            required: true,
+            message: "密码不能为空",
+            trigger: ["blur", "change"]
+          }
+        },
+        radio: "",
+        switchVal: false
+      };
+    },
+    methods: {
+      // 提交
+      submit() {
+        this.$refs.form.validate().then((res) => {
+          uni.showToast({
+            icon: "success",
+            title: "校验通过"
+          });
+        }).catch((errors) => {
+          uni.showToast({
+            icon: "error",
+            title: "请填写完整信息"
+          });
+        });
+      },
+      goRegister() {
         uni.navigateTo({
           url: "/pages/loginPage/register/register"
         });
-      };
-      const goHome = () => {
-        uni.navigateTo({
-          url: "/pages/CamaraTest/CamaraTest"
-        });
-      };
-      return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", null, [
-          vue.createElementVNode("text", null, "Login Page"),
-          vue.createElementVNode("button", {
-            onClick: _cache[0] || (_cache[0] = ($event) => goRegister())
-          }, "Register"),
-          vue.createElementVNode("button", {
-            onClick: _cache[1] || (_cache[1] = ($event) => goHome())
-          }, "Home Page")
-        ]);
-      };
+      },
+      hideKeyboard() {
+        uni.hideKeyboard();
+      }
     }
   };
-  const PagesLoginPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/loginPage/login/login.vue"]]);
-  const _sfc_main$1 = {};
-  function _sfc_render(_ctx, _cache) {
-    return vue.openBlock(), vue.createElementBlock("view", null, [
-      vue.createElementVNode("text", null, "Register Page")
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_input = resolveEasycom(vue.resolveDynamicComponent("uv-input"), __easycom_0$1);
+    const _component_uv_form_item = resolveEasycom(vue.resolveDynamicComponent("uv-form-item"), __easycom_1);
+    const _component_uv_button = resolveEasycom(vue.resolveDynamicComponent("uv-button"), __easycom_3);
+    const _component_uv_form = resolveEasycom(vue.resolveDynamicComponent("uv-form"), __easycom_2);
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "uv-page",
+      style: { "background-color": "#fff" }
+    }, [
+      vue.createElementVNode("view", { class: "uv-demo-block" }, [
+        vue.createElementVNode("view", { class: "uv-demo-block__content" }, [
+          vue.createVNode(_component_uv_form, {
+            labelPosition: "left",
+            model: $data.loginModel,
+            rules: $data.rules,
+            ref: "form",
+            labelWidth: "80"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_uv_form_item, {
+                label: "账号",
+                prop: "userInfo.name",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.loginModel.userInfo.name,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.loginModel.userInfo.name = $event),
+                    placeholder: "请输入账号",
+                    border: "None"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uv_form_item, {
+                label: "密码",
+                prop: "userInfo.passward",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.loginModel.userInfo.passward,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.loginModel.userInfo.passward = $event),
+                    placeholder: "请输入密码",
+                    border: "None",
+                    password: "",
+                    clearable: ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uv_button, {
+                type: "primary",
+                text: "登录",
+                customStyle: "margin-top: 50px",
+                onClick: $options.submit
+              }, null, 8, ["onClick"])
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["model", "rules"]),
+          vue.createVNode(_component_uv_button, {
+            type: "primary",
+            text: "注册",
+            plain: "True",
+            onClick: _cache[2] || (_cache[2] = ($event) => $options.goRegister()),
+            customStyle: "margin-top: 10px"
+          })
+        ])
+      ])
     ]);
   }
-  const PagesLoginPageRegisterRegister = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "E:/HbuilderXProject/PCBDetectionFront/pages/loginPage/register/register.vue"]]);
+  const PagesLoginPageLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/loginPage/login/login.vue"]]);
+  const _sfc_main$1 = {
+    data() {
+      return {
+        form: {
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: ""
+        },
+        rules: {
+          username: [
+            { required: true, message: "请填写用户名", trigger: ["blur", "change"] },
+            { pattern: /^[a-zA-Z0-9]{6,12}$/, message: "用户名格式不正确", trigger: ["blur", "change"] }
+          ],
+          email: [
+            { required: true, message: "请填写邮箱", trigger: ["blur", "change"] },
+            { type: "email", message: "邮箱格式不正确", trigger: ["blur", "change"] }
+          ],
+          password: [
+            { required: true, message: "请填写密码", trigger: ["blur", "change"] },
+            { pattern: /^[a-zA-Z0-9]{6,12}$/, message: "密码格式不正确", trigger: ["blur", "change"] }
+          ],
+          confirmPassword: [
+            { required: true, message: "请确认您的密码", trigger: ["blur", "change"] },
+            { validator: (rule, value, callback) => {
+              if (value !== this.form.password) {
+                callback(new Error("两次密码输入不一致"));
+              } else {
+                callback();
+              }
+            }, trigger: ["blur", "change"] }
+          ]
+        }
+      };
+    },
+    methods: {
+      submitForm() {
+        this.$refs.form.validate().then(() => {
+          uni.showLoading({
+            title: "正在提交"
+          });
+          setTimeout(() => {
+            uni.hideLoading();
+            toast("注册成功");
+          }, 2e3);
+        }).catch((errors) => {
+          toast("请填写完整信息");
+        });
+      },
+      resetForm() {
+        this.$refs.form.resetFields();
+      }
+    },
+    onReady() {
+      this.$refs.form.setRules(this.rules);
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uv_input = resolveEasycom(vue.resolveDynamicComponent("uv-input"), __easycom_0$1);
+    const _component_uv_form_item = resolveEasycom(vue.resolveDynamicComponent("uv-form-item"), __easycom_1);
+    const _component_uv_form = resolveEasycom(vue.resolveDynamicComponent("uv-form"), __easycom_2);
+    const _component_uv_button = resolveEasycom(vue.resolveDynamicComponent("uv-button"), __easycom_3);
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: "uv-page",
+      style: { "background-color": "#fff" }
+    }, [
+      vue.createElementVNode("view", { class: "uv-demo-block" }, [
+        vue.createElementVNode("text", { class: "uv-demo-block__title" }, "注册表单"),
+        vue.createElementVNode("view", { class: "uv-demo-block__content" }, [
+          vue.createVNode(_component_uv_form, {
+            labelPosition: "left",
+            labelWidth: "80",
+            model: $data.form,
+            rules: $data.rules,
+            ref: "form"
+          }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_uv_form_item, {
+                label: "用户名",
+                prop: "username",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.form.username,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.form.username = $event),
+                    border: "none",
+                    placeholder: "6~12位数字或字母,不允许包含特殊符号"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uv_form_item, {
+                label: "邮箱",
+                prop: "email",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.form.email,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.form.email = $event),
+                    border: "none",
+                    placeholder: "请输入您的邮箱"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uv_form_item, {
+                label: "密码",
+                prop: "password",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.form.password,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.form.password = $event),
+                    border: "none",
+                    placeholder: "6~12位数字或字母,不允许包含特殊符号",
+                    password: "",
+                    clearable: ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uv_form_item, {
+                label: "确认密码",
+                prop: "confirmPassword",
+                borderBottom: ""
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uv_input, {
+                    modelValue: $data.form.confirmPassword,
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.form.confirmPassword = $event),
+                    border: "none",
+                    placeholder: "请确认您的密码",
+                    password: "",
+                    clearable: ""
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              })
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["model", "rules"]),
+          vue.createVNode(_component_uv_button, {
+            type: "primary",
+            text: "注册",
+            customStyle: "margin-top: 50px",
+            onClick: $options.submitForm
+          }, null, 8, ["onClick"])
+        ])
+      ])
+    ]);
+  }
+  const PagesLoginPageRegisterRegister = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/pages/loginPage/register/register.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/CamaraTest/CamaraTest", PagesCamaraTestCamaraTest);
   __definePage("pages/picturePreview/picturePreview", PagesPicturePreviewPicturePreview);
@@ -8538,7 +11605,7 @@ ${i3}
       formatAppLog("log", "at App.vue:10", "App Hide");
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/HbuilderXProject/PCBDetectionFront/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/Codes_Projects/pcb_uniapp/PCBDetectionFront/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     app.use(createPinia());
