@@ -1,10 +1,30 @@
 <template>
 	<view>
 		<uv-tabbar :value="tabBarValue" @change="index=>tabBarValue = index">
-			<uv-tabbar-item text="首页" icon="home" @tap="goCamaraTest"></uv-tabbar-item>
-			<uv-tabbar-item text="放映厅" icon="photo" @tap="goChartsTest"></uv-tabbar-item>
-			<uv-tabbar-item text="直播" icon="play-right" @tap="goPicturePreviewTest"></uv-tabbar-item>
-			<uv-tabbar-item text="我的" icon="account"></uv-tabbar-item>
+			<template v-if="authType == 0">
+				<uv-tabbar-item text="任务" icon="order" @tap="goCamaraTest"></uv-tabbar-item>
+				<uv-tabbar-item text="我的" icon="account" @tap="goChartsTest"></uv-tabbar-item>
+			</template>
+			<template v-else-if="authType == 1">
+				<uv-tabbar-item text="数据展示" @tap="goDataDisplay">
+					<template v-slot:active-icon>
+						<image class="icon" src="@/static/icon/data-display-activated.png"></image>
+					</template>
+					<template v-slot:inactive-icon>
+						<image class="icon" src="@/static/icon/data-display.png"></image>
+					</template>
+				</uv-tabbar-item>
+				<uv-tabbar-item text="任务管理" icon="order" @tap="goChartsTest"></uv-tabbar-item>
+				<uv-tabbar-item text="用户管理" @tap="goCamaraTest">
+					<template v-slot:active-icon>
+						<image class="icon" src="@/static/icon/user-admin-activated.png"></image>
+					</template>
+					<template v-slot:inactive-icon>
+						<image class="icon" src="@/static/icon/user-admin.png"></image>
+					</template>
+				</uv-tabbar-item>
+				<uv-tabbar-item text="我的" icon="account"></uv-tabbar-item>
+			</template>
 		</uv-tabbar>
 	</view>
 </template>
@@ -12,10 +32,19 @@
 <script setup>
 	import { ref } from 'vue';
 	import { useTabBarNavigateStore } from '@/stores/tabBarNavigateStore'
+	import { useUserAuthStore } from '@/stores/userAuthStore'
 	import { storeToRefs } from 'pinia'
 
 	const tabBarNavigaterStore = useTabBarNavigateStore()
 	const { tabBarValue } = storeToRefs(tabBarNavigaterStore)
+	const userAuthStore = useUserAuthStore()
+	const { authType } = storeToRefs(userAuthStore)
+
+	const goDataDisplay = () => {
+		uni.reLaunch({
+			url:"/pages/dataShow/dataDisplay/dataDisplay"
+		})
+	}
 
 	const goCamaraTest = () => {
 		uni.reLaunch({
@@ -37,5 +66,8 @@
 </script>
 
 <style>
-
+	.icon {
+		width: 36rpx;
+		height: 36rpx;
+	}
 </style>

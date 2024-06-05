@@ -8,37 +8,43 @@
 		},
 		{
 			"path" : "pages/CamaraTest/CamaraTest",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : ""
 			}
 		},
 		{
 			"path" : "pages/picturePreview/picturePreview",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : ""
 			}
 		},
 		{
 			"path" : "pages/chartsTest/chartsTest",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : ""
 			}
 		},
 		{
 			"path" : "pages/loginPage/login/login",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : "登录"
 			}
 		},
 		{
 			"path" : "pages/loginPage/register/register",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : "注册"
+			}
+		},
+		{
+			"path": "pages/dataShow/dataDisplay/dataDisplay",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
 	],

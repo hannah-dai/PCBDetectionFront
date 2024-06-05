@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
+		<image class="logo" src="/static/logo/PCB.png"></image>
 		<view class="text-area">
 			<text class="title">{{title}}</text>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -19,7 +19,7 @@
 			uni.reLaunch({
 				url:"/pages/loginPage/login/login"
 			})
-		}, 1000)
+		}, 1500)
 	})
 </script>
 
@@ -32,9 +32,9 @@
 	}
 
 	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
+		height: 250rpx;
+		width: 250rpx;
+		margin-top: 250rpx;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 50rpx;
@@ -46,7 +46,7 @@
 	}
 
 	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+		font-size: 64rpx;
+		color: #000;
 	}
 </style>
