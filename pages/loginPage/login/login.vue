@@ -11,9 +11,9 @@
 						<uv-input v-model="loginModel.userInfo.passward" placeholder="请输入密码" border="None" password clearable></uv-input>
 					</uv-form-item>
 
-					<uv-button type="primary" text="登录" customStyle="margin-top: 50px" @click="submit"></uv-button>
+					<uv-button type="primary" text="登录" customStyle="margin-top: 50px" @click="goHome"></uv-button>
 				</uv-form>
-				<uv-button type="primary" text="注册" plain="True" @click="goRegister()"
+				<uv-button type="primary" text="注册" :plain="true" @click="goRegister()"
 					customStyle="margin-top: 10px"></uv-button>
 			</view>
 		</view>
@@ -81,6 +81,11 @@
 			},
 			hideKeyboard() {
 				uni.hideKeyboard()
+			},
+			goHome(){
+				uni.reLaunch({
+					url:'/pages/dataShow/dataDisplay/dataDisplay'
+				})
 			}
 		},
 	}

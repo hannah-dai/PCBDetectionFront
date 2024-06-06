@@ -23,7 +23,7 @@
 						<image class="icon" src="@/static/icon/user-admin.png"></image>
 					</template>
 				</uv-tabbar-item>
-				<uv-tabbar-item text="我的" icon="account"></uv-tabbar-item>
+				<uv-tabbar-item text="我的" icon="account" @tap="goPersonPage"></uv-tabbar-item>
 			</template>
 		</uv-tabbar>
 	</view>
@@ -61,6 +61,12 @@
 	const goPicturePreviewTest = () => {
 		uni.reLaunch({
 			url: "/pages/picturePreview/picturePreview"
+		})
+	}
+	
+	const goPersonPage = () => {
+		uni.reLaunch({
+			url:"/pages/personPage/personPage/personPage"
 		})
 	}
 </script>

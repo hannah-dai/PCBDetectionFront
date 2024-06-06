@@ -1,6 +1,5 @@
 <template>
 	<view class="backView">
-		<uv-sticky>......</uv-sticky>
 		<view class="timeSelect">
 			TimeSelect
 		</view>
@@ -17,10 +16,11 @@
 			TimeSelect
 		</view>
 	</view>
+	<bottomBar/>
 </template>
 
 <script setup>
-	
+	import bottomBar from '@/components/bottomBar/bottomBar.vue'
 </script>
 
 <style>
