@@ -24,7 +24,7 @@
 			"path" : "pages/chartsTest/chartsTest",
 			"style" :
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "图表展示"
 			}
 		},
 		{
@@ -81,7 +81,8 @@
 			{
 				"navigationBarTitleText" : "任务详情"
 			}
-		}
+		},
+
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
