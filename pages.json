@@ -51,7 +51,21 @@
 			"path" : "pages/personPage/personPage/personPage",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "个人界面"
+			}
+		},
+		{
+			"path" : "pages/personPage/personalSetting/personalSetting",
+			"style" : 
+			{
+				"navigationBarTitleText" : "个人信息"
+			}
+		},
+		{
+			"path" : "pages/personPage/accountManagement/accountManagement",
+			"style" : 
+			{
+				"navigationBarTitleText" : "账号与安全"
 			}
 		}
 	],
