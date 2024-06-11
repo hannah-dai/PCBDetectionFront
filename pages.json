@@ -81,6 +81,13 @@
 			{
 				"navigationBarTitleText" : "任务详情"
 			}
+		},
+		{
+			"path" : "pages/taskControl/taskList/taskList",
+			"style" : 
+			{
+				"navigationBarTitleText" : "任务列表"
+			}
 		}
 	],
 	"globalStyle": {
