@@ -8,10 +8,11 @@
 						</uv-input>
 					</uv-form-item>
 					<uv-form-item label="密码" prop="userInfo.passward" borderBottom>
-						<uv-input v-model="loginModel.userInfo.passward" placeholder="请输入密码" border="None" password clearable></uv-input>
+						<uv-input v-model="loginModel.userInfo.passward" placeholder="请输入密码" border="None" password
+							clearable></uv-input>
 					</uv-form-item>
 
-					<uv-button type="primary" text="登录" customStyle="margin-top: 50px" @click="goHome"></uv-button>
+					<uv-button type="primary" text="登录" customStyle="margin-top: 50px" @click="submit()"></uv-button>
 				</uv-form>
 				<uv-button type="primary" text="注册" :plain="true" @click="goRegister()"
 					customStyle="margin-top: 10px"></uv-button>
@@ -19,75 +20,121 @@
 		</view>
 	</view>
 </template>
-<script>
-	export default {
-		data() {
-			return {
-				loginModel: {
-					userInfo: {
-						name: '',
-						passward: ''
-					},
-				},
-				rules: {
-					'userInfo.name': [{
-							required: true,
-							message: '账号不能为空',
-							trigger: ['blur', 'change']
-						},
-						{
-							validator(rule, value, callback) {
-								const reg = /^[1-9][0-9]{7}$/;
-								if (!reg.test(value)) {
-									callback(new Error('账号必须是八位数字且首位不为0'));
-								} else {
-									callback();
-								}
-							},
-							trigger: ['blur', 'change']
-						}
-					],
-					'userInfo.passward': {
-						type: 'string',
-						required: true,
-						message: '密码不能为空',
-						trigger: ['blur', 'change']
-					},
-				},
-				radio: '',
-				switchVal: false
-			}
+<script setup>
+	import {
+		ErrorCodes,
+		ref
+	} from 'vue';
+	import {
+		useUserInfoStore
+	} from '@/stores/userInfoStore'
+	import { useTabBarNavigateStore } from '@/stores/tabBarNavigateStore.js'
+
+	const tabBarNavigateStore = useTabBarNavigateStore()
+
+	const loginModel = ref({
+		userInfo: {
+			name: '',
+			passward: ''
 		},
-		methods: {
-			// 提交
-			submit() {
-				// 如果有错误，会在catch中返回报错信息数组，校验通过则在then中返回true
-				this.$refs.form.validate().then(res => {
-					uni.showToast({
-						icon: 'success',
-						title: '校验通过'
-					})
-				}).catch(errors => {
-					uni.showToast({
-						icon: 'error',
-						title: '请填写完整信息'
-					})
-				})
+	})
+
+	const rules = ref({
+		'userInfo.name': [{
+				required: true,
+				message: '账号不能为空',
+				trigger: ['blur', 'change']
 			},
-			goRegister() {
-				uni.navigateTo({
-					url: '/pages/loginPage/register/register'
-				})
-			},
-			hideKeyboard() {
-				uni.hideKeyboard()
-			},
-			goHome(){
-				uni.reLaunch({
-					url:'/pages/dataShow/dataDisplay/dataDisplay'
-				})
+			{
+				pattern: /^[\u4e00-\u9fa5a-zA-Z0-9]{6,12}$/,
+				message: '6~12位字符且不包含特殊字符',
+				trigger: ['blur', 'change'],
 			}
-		},
+		],
+		'userInfo.passward': [{
+				type: 'string',
+				required: true,
+				message: '密码不能为空',
+				trigger: ['blur', 'change']
+			},
+			{
+				pattern: /^[a-zA-Z0-9]{6,12}$/,
+				message: '密码格式不正确',
+				trigger: ['blur', 'change'],
+			}
+		],
+	})
+
+	const radio = ref('')
+	const switchVal = ref(false)
+	const userInfoStore = useUserInfoStore()
+	const form = ref(null)
+
+	const submit = () => {
+		// 如果有错误，会在catch中返回报错信息数组，校验通过则在then中返回true
+		form.value.validate().then(res => {
+			uni.request({
+				url: 'http://10.0.2.2:8000/login/',
+				method: 'POST',
+				data: {
+					'userName': loginModel.value.userInfo.name,
+					'password': loginModel.value.userInfo.passward
+				},
+				success: (res) => {
+					if (res.data['errorInfo'] === undefined) {
+						let data = res.data
+						const token = data['token']
+						uni.setStorageSync('token', token)
+
+						userInfoStore.username = data['username']
+						userInfoStore.fullName = data['fullName']
+						userInfoStore.email = data['email']
+
+						uni.showToast({
+							title: '登录成功',
+							icon: 'success',
+							duration: 1000
+						})
+						goHome()
+					} else {
+						uni.showToast({
+							title: res.data['errorInfo'],
+							icon: "error",
+							duration: 1000
+						})
+					}
+				},
+				fail: (err) => {
+					uni.showToast({
+						title: "请求失败",
+						icon: "error",
+						duration: 1000
+					})
+				}
+			})
+		}).catch(errors => {
+			uni.showToast({
+				icon: 'error',
+				title: '登录信息有误'
+			})
+		})
+	}
+
+	const goRegister = () => {
+		uni.navigateTo({
+			url: '/pages/loginPage/register/register'
+		})
+	}
+
+	const hideKeyboard = () => {
+		uni.hideKeyboard()
+	}
+
+	const goHome = () => {
+		tabBarNavigateStore.tabBarValue = 0
+		uni.reLaunch({
+			url: '/pages/dataShow/dataDisplay/dataDisplay'
+		})
 	}
 </script>
 

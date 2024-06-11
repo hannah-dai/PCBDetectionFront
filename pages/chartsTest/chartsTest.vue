@@ -1,17 +1,15 @@
 <template>
 	<view class="content">
-
-
 		<view class="chart-con">
 			<!-- 时间筛选框开始 -->
-			<view><uni-row class="uni-row" :width="nvueWidth">
+			<view><uni-row class="uni-row" :width="timeSelectWidth">
 					<uni-col :span="8">
 						<view><uni-section class=uni-wrap title="'时间选择'" type="circle"></uni-section>
 						</view>
 					</uni-col>
 					<uni-col :span="16">
 						<!-- span调整两列的占比，可任意调整 -->
-						<uni-datetime-picker v-model="range" type="daterange" @maskClick="maskClick" />
+						<uni-datetime-picker v-model="range" type="daterange"/>
 					</uni-col>
 				</uni-row></view>
 			<!-- 时间筛选框结束 -->
@@ -38,7 +36,7 @@
 				</view>
 				<view class="line-chart-con">
 					<uni-section>
-						<uni-data-select v-model="selectedLines" :localdata="productionLines" @change="onSelectChange"
+						<uni-data-select :title="生产线选择" v-model="selectedLines" :localdata="productionLines" @change="onSelectChange"
 							multiple label="选择生产线" placeholder="选择生产线"></uni-data-select>
 					</uni-section>
 
@@ -61,11 +59,8 @@
 			</view>
 		</view>
 		<!-- 良品率随时间变化折现-结束 -->
-
-
-
-
 	</view>
+	<bottomBar/>
 </template>
 
 <script>
@@ -88,6 +83,7 @@
 	import {
 		CanvasRenderer
 	} from 'echarts/renderers';
+	import bottomBar from '@/components/bottomBar/bottomBar.vue'
 	// 注册必须的组件
 	echarts.use([
 		TooltipComponent,
@@ -105,6 +101,7 @@
 				datetimerange: [],
 				start: Date.now() - 1000000000,
 				end: Date.now() + 1000000000,
+				timeSelectWidth: 100,
 
 				// 生产线
 				selectedLines: null,
@@ -145,6 +142,8 @@
 				this.loadRingData();
 				//加载良品率折线图数据
 				this.loadLineData_quality();
+				//加载缺陷的折线图数据
+				this.loadLineData(this.dataMap[1])
 			})
 
 			//时间选择范围默认选择从今日到前一周时间内
@@ -183,9 +182,9 @@
 			loadLineData_quality() {
 				let res = {
 					//x轴数据
-					xData: ['6/11', '6/12', '6/13', '6/14', '6/15', '6/16', '6/17'],
+					xData: ['6/11', '6/12', '6/13', '6/14', '6/15', '6/16', '6/17', '6/18', '6/19', '6/20'],
 					//y轴数据
-					yData: [50, 120, 150, 220, 180, 300, 130],
+					yData: [50, 120, 150, 220, 180, 300, 130, 150, 200, 600],
 				}
 
 				//这里option配置参考文档：https://echarts.apache.org/zh/option.html
