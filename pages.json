@@ -81,8 +81,7 @@
 			{
 				"navigationBarTitleText" : "任务详情"
 			}
-		},
-
+		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
