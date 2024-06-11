@@ -24,7 +24,7 @@
 			"path" : "pages/chartsTest/chartsTest",
 			"style" :
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "图表展示"
 			}
 		},
 		{
@@ -80,13 +80,6 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "任务详情"
-			}
-		},
-		{
-			"path" : "pages/taskControl/taskList/taskList",
-			"style" : 
-			{
-				"navigationBarTitleText" : "任务列表"
 			}
 		}
 	],
