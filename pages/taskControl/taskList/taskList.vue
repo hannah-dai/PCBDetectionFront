@@ -40,14 +40,9 @@
 
 		<!-- 当前工人被指派的任务列表 -->
 		<view class="uv-section">
-			<text class="section-title">被指派的任务</text>
 			<uv-collapse>
-				<uv-collapse-item
-					v-for="(task, index) in assignedTasks"
-					:key="index"
-					:title="`开始时间: ${task.appearanceTime} 流水线: ${task.pipelineNumber} 缺陷类别: ${task.defectType}`"
-				>
-					<view class="task-content">
+				<uv-collapse-item title="被指派的任务">
+					<view v-for="(task, index) in assignedTasks" :key="index" class="task-content">
 						<view class="task-info">
 							<text class="label">任务编号:</text>
 							<text>{{ task.id }}</text>
@@ -83,14 +78,9 @@
 
 		<!-- 工人已完成的任务列表 -->
 		<view class="uv-section">
-			<text class="section-title">已完成的任务</text>
 			<uv-collapse>
-				<uv-collapse-item
-					v-for="(task, index) in completedTasks"
-					:key="index"
-					:title="`开始时间: ${task.appearanceTime} 流水线: ${task.pipelineNumber} 缺陷类别: ${task.defectType}`"
-				>
-					<view class="task-content">
+				<uv-collapse-item title="已完成的任务">
+					<view v-for="(task, index) in completedTasks" :key="index" class="task-content">
 						<view class="task-info">
 							<text class="label">任务编号:</text>
 							<text>{{ task.id }}</text>
@@ -185,7 +175,7 @@
 		background: #fff;
 		padding: 10px;
 		border-radius: 5px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 		margin-bottom: 10px;
 	}
 
