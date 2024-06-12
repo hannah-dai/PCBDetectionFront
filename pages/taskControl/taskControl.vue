@@ -4,66 +4,88 @@
 		<uv-drop-down ref="dropDownRef" sign="dropDown_1" text-active-color="#3c9cff"
 			:extra-icon="{name:'arrow-down-fill',color:'#666',size:'26rpx'}"
 			:extra-active-icon="{name:'arrow-up-fill',color:'#3c9cff',size:'26rpx'}" :defaultValue="defaultValue"
-			:custom-style="{padding: '0 30rpx'}" @click="selectMenu">
-			<uv-drop-down-item name="completionStatus" type="2" :label="dropItem('completionStatus').label"
-				:value="dropItem('completionStatus').value">
+			:custom-style="{padding: '0 90rpx'}" @click="selectMenu">
+			<uv-drop-down-item name="finishStatus" type="2" :label="dropItem('finishStatus').label"
+				:value="dropItem('finishStatus').value">
 			</uv-drop-down-item>
-			<uv-drop-down-item name="assignmentStatus" type="2" :label="dropItem('assignmentStatus').label"
-				:value="dropItem('assignmentStatus').value">
-			</uv-drop-down-item>
-			<uv-drop-down-item name="dateOrder" type="2" :label="dropItem('dateOrder').label"
-				:value="dropItem('dateOrder').value">
+			<uv-drop-down-item name="timeOrder" type="2" :label="dropItem('timeOrder').label"
+				:value="dropItem('timeOrder').value">
 			</uv-drop-down-item>
 		</uv-drop-down>
 		<uv-drop-down-popup sign="dropDown_1" :click-overlay-on-close="true" :currentDropItem="currentDropItem"
 			@clickItem="clickItem"></uv-drop-down-popup>
 
-		<view>
-			<uni-datetime-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
+		<!-- 任务列表部分 -->
+		<view class="task-list">
+			<uv-collapse :border="false" ref="collapseRef">
+				<view v-for="task in taskList" :key="task.id">
+					<uv-collapse-item :border="false"
+						:title="`任务: ${task.id.toString().padStart(4, '0')}&nbsp;&nbsp;&nbsp;状态: ${task.assignTime === null ? '未分配' : task.finishTime === null ? '未完成' : '已完成'}`"
+						class="collapse-item">
+						<view class="task-content">
+							<view class="task-info">
+								<text class="label">创建时间:</text>
+								<text>{{ format(task.createTime, 'yyyy-MM-dd HH:mm:ss') }}</text>
+							</view>
+
+							<view class="task-info">
+								<text class="label">分配时间:</text>
+								<text>{{ task.assignTime === null ? '未分配' : format(task.assignTime, 'yyyy-MM-dd HH:mm:ss') }}</text>
+							</view>
+
+							<view class="task-info">
+								<text class="label">完成时间:</text>
+								<text>{{ task.finishTime === null ? '未完成' : format(task.finishTime, 'yyyy-MM-dd HH:mm:ss') }}</text>
+							</view>
+
+							<view class="task-info">
+								<text class="label">分配人员编号:</text>
+								<text>{{ task.assignWorkerEmpno === null ? '无' : task.assignWorkerEmpno }}</text>
+							</view>
+
+							<view class="task-actions">
+								<uv-button class="task-button" type="primary" :plain="true"
+									@click="viewTaskDetail(task.id)">详情</uv-button>
+							</view>
+						</view>
+					</uv-collapse-item>
+				</view>
+			</uv-collapse>
 		</view>
 
-		<!-- 任务列表部分 -->
-		<uv-collapse>
-			<uv-collapse-item v-for="(task, index) in filteredTasks" :key="index"
-				:title="`任务: ${task.id} 状态: ${task.status}`">
-				<view class="task-content">
+		<view>
+			<uniFab :pattern="pattern" :horizontal="horizontal" :vertical="vertical" :direction="direction"
+				@fabClick="fabClick"></uniFab>
+		</view>
 
-					<view class="task-info">
-						<text class="label">出现时间:</text>
-						<text>{{ task.appearanceTime }}</text>
+		<view>
+			<uv-popup ref='popupRef' mode="center" :round="5">
+				<view class="popup-body">
+					<view class="popup-title">
+						<view class="ver-line"></view>
+						<view class="title-desc">
+							<text>
+								任务时间筛选
+							</text>
+						</view>
 					</view>
-					<view class="task-info">
-						<text class="label">完成时间:</text>
-						<text>{{ task.status === '已完成' ? task.completionTime : '未完成' }}</text>
+
+					<view class="time-selecter">
+						<uni-datetime-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" :clear-icon="false" />
 					</view>
 
-					<view class="task-info">
-						<text class="label">分配人员编号:</text>
-						<text @click="task.assignment === '已分配' ? showPersonnelInfo(task.assignmentNumber) : null"
-							:class="{'link-text': task.assignment === '已分配', 'unassigned': task.assignment !== '已分配'}">
-							{{ task.assignment === '已分配' ? task.assignmentNumber : '未分配' }}
-						</text>
-					</view>
-					<view class="task-actions">
-
-						<uv-button @click="viewTaskDetail(task.id)"
-							customStyle="flex: 1; margin-right: 10px;">详情</uv-button>
-
+					<view class="popup-buttom-group">
+						<uv-button type="default" text="取消" shape="circle" color="rgb(148 163 184)" :plain="true"
+							class="popup-bottom" @tap="closePopup" />
+						<uv-button type="primary" text="筛选" shape="circle" class="popup-bottom" @tap="filterByTime" />
 					</view>
 				</view>
-			</uv-collapse-item>
-		</uv-collapse>
-
-		<!-- 人员选择器 -->
-		<uv-picker ref="pickerRef" :columns="personnelColumns" @cancel="cancelPicker" @confirm="confirmPicker"
-			@change="changePicker"></uv-picker>
-
-		<view class="fab-block">
-			<uni-fab :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
-				:direction="direction" style="bottom: 100px;"></uni-fab>
+			</uv-popup>
 		</view>
 
 		<bottomBar />
+
+		<uv-toast ref="toastRef" class="toast-block"></uv-toast>
 	</view>
 </template>
 <script setup>
@@ -73,23 +95,37 @@
 	import bottomBar from '@/components/bottomBar/bottomBar.vue'
 	import {
 		computed,
-		ref
+		ref,
+		watch
 	} from 'vue';
+	import uniFab from '@/uni_modules/my-fab/components/uniFab/uniFab.vue'
+	import {
+		onLoad,
+		onReady,
+		onShow
+	} from '@dcloudio/uni-app'
+	import {
+		startOfDay,
+		format
+	} from 'date-fns'
 
-	const defaultValue = ref(['all', 'all', 'asc'])
+	const popupRef = ref(null)
+
+	const defaultValue = ref(['all', 'ASC'])
 	const result = ref([])
-	const activeName = ref('completionStatus')
+	const activeName = ref('finishStatus')
 	const selectedTaskIndex = ref(null)
-	const personnelColumns = ref([
-		['人员A', '人员B', '人员C']
-	])
-	const datetimerange = ref([])
+	const datetimerange = ref([format(startOfDay(new Date()), 'yyyy-MM-dd HH:mm:ss'), format(new Date(),
+		'yyyy-MM-dd HH:mm:ss')])
+	const taskList = ref([])
 
 	const dropDownRef = ref(null)
 	const pickerRef = ref(null)
+	const collapseRef = ref(null)
+	const toastRef = ref(null)
 
 	const selections = ref({
-		completionStatus: {
+		finishStatus: {
 			label: '完成情况',
 			value: 'all',
 			activeIndex: 0,
@@ -100,136 +136,36 @@
 					value: 'all'
 				},
 				{
-					label: '已完成',
-					value: 'completed'
+					label: '未分配',
+					value: 'unAssign'
 				},
 				{
 					label: '未完成',
-					value: 'incomplete'
-				}
-			]
-		},
-		assignmentStatus: {
-			label: '分配情况',
-			value: 'all',
-			activeIndex: 0,
-			color: '#333',
-			activeColor: '#2878ff',
-			child: [{
-					label: '全部',
-					value: 'all'
+					value: 'unFinish'
 				},
 				{
-					label: '已分配',
-					value: 'assigned'
+					label: '已完成',
+					value: 'finished'
 				},
-				{
-					label: '未分配',
-					value: 'unassigned'
-				}
 			]
 		},
-		dateOrder: {
+		timeOrder: {
 			label: '日期排序',
-			value: 'asc',
+			value: 'ASC',
 			activeIndex: 0,
 			color: '#333',
 			activeColor: '#2878ff',
 			child: [{
 					label: '升序',
-					value: 'asc'
+					value: 'ASC'
 				},
 				{
 					label: '降序',
-					value: 'desc'
+					value: 'DES'
 				}
 			]
 		}
 	})
-
-	const tasks = ref([{
-			id: 1,
-			pipelineNumber: '123',
-			status: '未完成',
-			assignment: '未分配',
-			appearanceTime: '2024-01-01 12:00',
-			assignmentNumber: '无',
-			assignmentTime: '无',
-			completionTime: '无'
-		},
-		{
-			id: 2,
-			pipelineNumber: '456',
-			status: '已完成',
-			assignment: '已分配',
-			appearanceTime: '2024-01-02 13:00',
-			assignmentNumber: 'T123',
-			assignmentTime: '2024-01-02 14:00',
-			completionTime: '2024-01-03 15:00'
-		},
-		{
-			id: 3,
-			pipelineNumber: '789',
-			status: '未完成',
-			assignment: '已分配',
-			appearanceTime: '2024-01-03 14:00',
-			assignmentNumber: 'T456',
-			assignmentTime: '2024-01-03 15:00',
-			completionTime: '无'
-		},
-		{
-			id: 4,
-			pipelineNumber: '012',
-			status: '已完成',
-			assignment: '未分配',
-			appearanceTime: '2024-01-04 15:00',
-			assignmentNumber: '无',
-			assignmentTime: '无',
-			completionTime: '2024-01-05 16:00'
-		}
-	])
-
-	const filteredTasks = ref([{
-			id: 1,
-			pipelineNumber: '123',
-			status: '未完成',
-			assignment: '未分配',
-			appearanceTime: '2024-01-01 12:00',
-			assignmentNumber: '无',
-			assignmentTime: '无',
-			completionTime: '无'
-		},
-		{
-			id: 2,
-			pipelineNumber: '456',
-			status: '已完成',
-			assignment: '已分配',
-			appearanceTime: '2024-01-02 13:00',
-			assignmentNumber: 'T123',
-			assignmentTime: '2024-01-02 14:00',
-			completionTime: '2024-01-03 15:00'
-		},
-		{
-			id: 3,
-			pipelineNumber: '789',
-			status: '未完成',
-			assignment: '已分配',
-			appearanceTime: '2024-01-03 14:00',
-			assignmentNumber: 'T456',
-			assignmentTime: '2024-01-03 15:00',
-			completionTime: '无'
-		},
-		{
-			id: 4,
-			pipelineNumber: '012',
-			status: '已完成',
-			assignment: '未分配',
-			appearanceTime: '2024-01-04 15:00',
-			assignmentNumber: '无',
-			assignmentTime: '无',
-			completionTime: '2024-01-05 16:00'
-		}
-	])
 
 	const dropItem = computed(() => {
 		return name => {
@@ -293,87 +229,124 @@
 		result.value = result.value.filter(item => defaultValue.value.indexOf(item.value) === -1)
 	}
 
-	const showPersonnelInfo = (assignmentNumber) => {
-		uni.showToast({
-			title: `分配人员编号: ${assignmentNumber}`,
-			icon: 'none'
-		});
-	}
+	const getTaskList = () => {
+		let finishStatus = null
+		let timeOrder = 'ASC'
 
-	const showPicker = (index) => {
-		selectedTaskIndex.value = index;
-		pickerRef.value.open();
-	}
-
-	const changePicker = (e) => {
-		console.log('changePicker', e);
-	}
-
-	const confirmPicker = (e) => {
-		if (selectedTaskIndex.value !== null) {
-			tasks.value[selectedTaskIndex.value].assignment = '已分配';
-			tasks.value[selectedTaskIndex.value].assignmentNumber = e.value[0];
-			tasks.value[selectedTaskIndex.value].assignmentTime = new Date().toISOString().slice(0, 19).replace('T',
-				' ');
-			selectedTaskIndex.value = null;
+		for (const item of result.value) {
+			if (item.name === 'finishStatus') {
+				finishStatus = item.value
+			} else {
+				timeOrder = item.value
+			}
 		}
-	}
 
-	const cancelPicker = () => {
-		selectedTaskIndex.value = null;
-	}
+		uni.request({
+			url: 'http://10.0.2.2:8000/task/getTaskList/',
+			method: 'GET',
+			data: {
+				'startTime': format(datetimerange.value[0], "yyyy-MM-dd HH:MM:ss"),
+				'endTime': format(datetimerange.value[1], "yyyy-MM-dd HH:MM:ss"),
+				'finishStatus': finishStatus,
+				'timeOrder': timeOrder
+			},
+			success: (res) => {
+				const data = res.data
 
-	const viewTaskDetail = (taskId) => {
-		uni.navigateTo({
-			url: `/pages/taskControl/taskDetail/taskDetail?taskId=${taskId}`
-		});
-	}
-
-	const cancelTask = (taskId) => {
-		uni.showToast({
-			title: `取消任务ID: ${taskId}`,
-			icon: 'none'
+				taskList.value = data
+				collapseRef.value.init()
+			},
+			fail: (err) => {
+				uni.showToast({
+					title: '请求失败',
+					icon: 'error',
+					duration: 1000
+				})
+			}
 		})
 	}
 
 	const horizontal = 'right'
 	const vertical = 'bottom'
 	const direction = 'horizontal'
-	const pattern = {
+	const pattern = ref({
 		color: '#7A7E83',
 		backgroundColor: '#fff',
 		selectedColor: '#007AFF',
 		buttonColor: '#007AFF',
 		iconColor: '#fff'
+	})
+
+	const fabClick = () => {
+		openPopup()
 	}
 
-	const content = ref([{
-		iconPath: '/static/icon/add-worker.png',
-		selectedIconPath: '/static/icon/add-worker-active.png',
-		text: '工人',
-		active: false
-	}])
+	const openPopup = () => {
+		popupRef.value.open()
+	}
+
+	const closePopup = () => {
+		popupRef.value.close()
+	}
+
+	const showTip = () => {
+		toastRef.value.show({
+			type: 'default',
+			message: '默认筛选时间为今日凌晨到当前时刻，可点击右下角按钮修改筛选时间',
+			duration: 2500,
+			position: 'top'
+		})
+	}
+	
+	const filterByTime = () => {
+		getTaskList()
+		closePopup()
+	}
+	
+	const viewTaskDetail = (id) => {
+		uni.navigateTo({
+			url: `/pages/taskControl/taskDetail/taskDetail?id=${id}`
+		})
+	}
+
+	watch(result, () => {
+		getTaskList()
+	})
+
+	onLoad(() => {
+		getTaskList()
+	})
+
+	onReady(() => {
+		collapseRef.value.init()
+		showTip()
+	})
+	
+	onShow(() => {
+		getTaskList()
+	})
 </script>
 <style scoped lang="scss">
 	.uv-page {
-		padding: 15px;
+		background-color: #FFF;
+		min-height: 100%;
 	}
 
-	.collapse-title {
-		display: flex;
-		justify-content: space-between;
-		padding: 5px 0;
+	.task-list {
+		background-color: #fff;
 	}
 
-	.collapse-title-item {
-		flex: 1;
-		text-align: center;
+	.collapse-item {
+		padding: 5px 0px;
+	}
+
+	.collapse-text {
+		font-size: 12px;
 	}
 
 	.task-content {
-		padding: 10px;
-		border-bottom: 1px solid #e5e5e5;
-		margin-bottom: 10px;
+		width: 95%;
+		margin: 0px auto;
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -383,6 +356,16 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 5px 0;
+	}
+
+	.task-actions {
+		margin: 0px auto;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.task-button {
+		width: 100%;
 	}
 
 	.label {
@@ -399,10 +382,53 @@
 		color: #ccc;
 	}
 
-	.task-actions {
+	.popup-style {
+		border-radius: 0.5rem;
+	}
+
+	.popup-body {
+		width: 380px;
+	}
+
+	.popup-buttom-group {
 		display: flex;
-		justify-content: center;
-		/* 将子元素水平居中 */
-		margin-top: 10px;
+		flex-direction: row;
+		justify-content: space-around;
+		margin-bottom: 20px;
+	}
+
+	.popup-bottom {
+		width: 130px;
+	}
+
+	.popup-title {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0px 14px;
+		margin: 10px 0px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.ver-line {
+		height: 16px;
+		width: 4px;
+		border-radius: 10px;
+		background-color: #0081CF;
+	}
+
+	.title-desc {
+		font-size: 16px;
+		color: #222222;
+		margin-left: 12px;
+		font-weight: bold;
+	}
+
+	.time-selecter {
+		width: 90%;
+		margin: 15px auto;
+		margin-bottom: 20px;
 	}
 </style>

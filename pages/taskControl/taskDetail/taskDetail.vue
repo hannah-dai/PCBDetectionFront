@@ -4,10 +4,10 @@
 		<view class="uv-demo-block">
 			<text class="uv-demo-block__title">PCB缺陷拍摄图</text>
 			<view class="uv-demo-block__content">
-				<uv-album :urls="pcbDefectPhotos" :multipleSize="62" rowCount="4" maxCount="10"></uv-album>
+				<image :src="imageSrc" mode="aspectFit" @click="previewPicture" />
 			</view>
 		</view>
-		
+
 		<!-- 任务详细信息展示 -->
 		<view class="uv-demo-block">
 			<text class="uv-demo-block__title">任务详细信息</text>
@@ -17,119 +17,164 @@
 					<text>{{ task.id }}</text>
 				</view>
 				<view class="task-info">
-					<text class="label">流水线编号:</text>
+					<text class="label">生产线编号:</text>
 					<text>{{ task.pipelineNumber }}</text>
 				</view>
 				<view class="task-info">
 					<text class="label">完成状态:</text>
-					<text>{{ task.status }}</text>
+					<text>{{ task.assignTime === null ? '未分配' : task.finishTime === null ? '未完成' : '已完成' }}</text>
 				</view>
 				<view class="task-info">
-					<text class="label">出现时间:</text>
-					<text>{{ task.appearanceTime }}</text>
+					<text class="label">创建时间:</text>
+					<text>{{ task.createTime }}</text>
 				</view>
 				<view class="task-info">
 					<text class="label">完成时间:</text>
-					<text>{{ task.status === '已完成' ? task.completionTime : '未完成' }}</text>
+					<text>{{ task.finishTime === null ? '未完成' : task.finishTime }}</text>
 				</view>
 				<view class="task-info">
 					<text class="label">分配时间:</text>
-					<text>{{ task.assignment === '已分配' ? task.assignmentTime : '未分配' }}</text>
+					<text>{{ task.assignTime === null ? '未分配' : task.assignTime }}</text>
 				</view>
 				<view class="task-info">
 					<text class="label">分配人员编号:</text>
-					<text @click="task.assignment === '已分配' ? showPersonnelInfo(task.assignmentNumber) : null" :class="{'link-text': task.assignment === '已分配', 'unassigned': task.assignment !== '已分配'}">
-						{{ task.assignment === '已分配' ? task.assignmentNumber : '未分配' }}
-					</text>
+					<text>{{ task.assignWorkerEmpno === null ? '无' : task.assignWorkerEmpno }}</text>
 				</view>
 				<view class="task-info">
-					<text class="label">缺陷类别:</text>
-					<text>{{ task.defectCategory }}</text>
+					<text class="label">缺孔缺陷:</text>
+					<text>{{ task.mhCount }}</text>
 				</view>
 				<view class="task-info">
-					<text class="label">缺陷数量:</text>
-					<text>{{ task.defectCount }}</text>
+					<text class="label">鼠咬缺陷:</text>
+					<text>{{ task.mbCount }}</text>
+				</view>
+				<view class="task-info">
+					<text class="label">开路缺陷:</text>
+					<text>{{ task.ocCount }}</text>
+				</view>
+				<view class="task-info">
+					<text class="label">短路缺陷:</text>
+					<text>{{ task.shCount }}</text>
+				</view>
+				<view class="task-info">
+					<text class="label">尖角线缺陷:</text>
+					<text>{{ task.spCount }}</text>
+				</view>
+				<view class="task-info">
+					<text class="label">多余铜缺陷:</text>
+					<text>{{ task.spcCount }}</text>
 				</view>
 				<view class="task-actions">
-					<uv-button @click="showPicker" customStyle="flex: 1; margin-right: 10px;">分配人员</uv-button>
-					<uv-button :disabled="task.status === '已完成' || task.assignment === '未分配'" @click="cancelTask(task.id)" type="error" customStyle="flex: 1;">取消任务</uv-button>
+					<uv-button class="task-button" type="primary" :plain="true" :disabled="task.assignTime !== null"
+						@click="goPersonnelAssignment">分配人员</uv-button>
+					<uv-button class="task-button" :disabled="task.finishTime !== null || task.assignTime === null"
+						type="error" @tap="cancelAssign">取消任务</uv-button>
 				</view>
 			</view>
 		</view>
-		
-		<!-- 人员选择器 -->
-		<uv-picker
-			ref="picker"
-			:columns="personnelColumns"
-			@cancel="cancelPicker"
-			@confirm="confirmPicker"
-			@change="changePicker"
-		></uv-picker>
 	</view>
 </template>
-<script>
-	import { toast } from '@/uni_modules/uv-ui-tools/libs/function/index.js';
+<script setup>
+	import {
+		ref
+	} from 'vue';
+	import {
+		toast
+	} from '@/uni_modules/uv-ui-tools/libs/function/index.js';
+	import {
+		onLoad,
+		onShow
+	} from '@dcloudio/uni-app'
 
-	export default {
-		data() {
-			return {
-				task: {
-					id: 1,
-					pipelineNumber: '123',
-					status: '未完成',
-					assignment: '未分配',
-					appearanceTime: '2024-01-01 12:00',
-					assignmentNumber: '无',
-					assignmentTime: '无',
-					completionTime: '无',
-					defectCategory: '焊接缺陷',
-					defectCount: 5
-				},
-				pcbDefectPhotos: [
-					'https://via.placeholder.com/100x200.png/3c9cff/fff',
-					'https://via.placeholder.com/200x200.png/3c9cff/fff',
-					'https://via.placeholder.com/300x200.png/3c9cff/fff',
-					'https://via.placeholder.com/280x200.png/3c9cff/fff',
-					'https://via.placeholder.com/240x200.png/3c9cff/fff',
-					'https://via.placeholder.com/180x200.png/3c9cff/fff',
-					'https://via.placeholder.com/140x200.png/3c9cff/fff',
-					'https://via.placeholder.com/150x200.png/3c9cff/fff',
-					'https://via.placeholder.com/90x200.png/3c9cff/fff',
-					'https://via.placeholder.com/220x200.png/3c9cff/fff'
-				],
-				personnelColumns: [['人员A', '人员B', '人员C']],
-				selectedTaskIndex: null
-			};
-		},
-		methods: {
-			showPersonnelInfo(assignmentNumber) {
-				uni.showToast({
-					title: `分配人员编号: ${assignmentNumber}`,
-					icon: 'none'
-				});
+	const taskId = ref(null)
+	const task = ref({})
+	const imageSrc = ref('')
+
+
+	const goPersonnelAssignment = () => {
+		uni.navigateTo({
+			url: `/pages/taskControl/personnelAssignment/personnelAssignment?id=${taskId.value}`
+		})
+	}
+
+	const downloadImage = () => {
+		uni.showLoading({
+			title: '加载中'
+		})
+
+		uni.downloadFile({
+			url: `http://10.0.2.2:8000/task/getTaskPicture/?id=${taskId.value}`,
+			success: (res) => {
+				imageSrc.value = res.tempFilePath
+				uni.hideLoading()
 			},
-			showPicker() {
-				this.$refs.picker.open();
-			},
-			changePicker(e) {
-				console.log('changePicker', e);
-			},
-			confirmPicker(e) {
-				this.task.assignment = '已分配';
-				this.task.assignmentNumber = e.value[0];
-				this.task.assignmentTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-			},
-			cancelPicker() {
-				this.selectedTaskIndex = null;
-			},
-			cancelTask(taskId) {
-				uni.showToast({
-					title: `取消任务ID: ${taskId}`,
-					icon: 'none'
-				});
+			fail: (err) => {
+				console.log("download fail for err ", err)
 			}
-		}
-	};
+		})
+	}
+
+	const previewPicture = () => {
+		uni.previewImage({
+			urls: [imageSrc.value]
+		})
+	}
+
+	const getTaskDetail = () => {
+		uni.request({
+			url: 'http://10.0.2.2:8000/task/getTaskDetail/',
+			method: 'GET',
+			data: {
+				'id': taskId.value
+			},
+			success: (res) => {
+				task.value = res.data
+			},
+			fail: (err) => {
+				uni.showToast({
+					title: '请求失败',
+					icon: 'error',
+					duration: 1000
+				})
+			}
+		})
+	}
+
+	const cancelAssign = () => {
+		uni.request({
+			url: 'http://10.0.2.2:8000/task/cancelAssign/',
+			method: 'POST',
+			data: {
+				'taskId': taskId.value
+			},
+			success: (res) => {
+				uni.showToast({
+					title: res.data.info,
+					icon: 'success',
+					duration: 1000
+				})
+			},
+			fail: (err) => {
+				uni.showToast({
+					title: '请求失败',
+					icon: 'error',
+					duration: 1000
+				})
+			}
+		})
+		getTaskDetail()
+	}
+
+	onLoad((options) => {
+		taskId.value = options.id
+
+		downloadImage()
+		getTaskDetail()
+	})
+
+	onShow(() => {
+		getTaskDetail()
+	})
 </script>
 <style scoped lang="scss">
 	.uv-page {
@@ -164,6 +209,7 @@
 
 	.task-info {
 		display: flex;
+		align-items: center;
 		justify-content: space-between;
 		padding: 5px 0;
 	}
@@ -184,9 +230,11 @@
 
 	.task-actions {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		margin-top: 10px;
-		gap: 10px;
+	}
+
+	.task-button {
+		width: 140px;
 	}
 </style>
-

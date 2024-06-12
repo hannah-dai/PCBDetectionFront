@@ -13,7 +13,7 @@
 				</view>
 			</view>
 			<view class="time-select-part">
-				<uni-datetime-picker v-model="timeRange" type="daterange" />
+				<uni-datetime-picker v-model="timeRange" type="daterange" :clear-icon="false" />
 			</view>
 		</view>
 		<view class="content">
@@ -61,6 +61,7 @@
 
 <script setup>
 	import {
+		onBeforeMount,
 		ref,
 		watch
 	} from 'vue';
@@ -95,7 +96,7 @@
 			},
 			success: (res) => {
 				const data = res.data
-
+				
 				productLineStore.productLineList = data.productLineList
 				productLineStore.timeRange = timeRange.value
 			},
@@ -109,7 +110,7 @@
 		})
 	}
 
-	onLoad(() => {
+	onBeforeMount(() => {
 		getProductLineList()
 	})
 
