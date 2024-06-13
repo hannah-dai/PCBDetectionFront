@@ -2,8 +2,8 @@
 	<view>
 		<uv-tabbar :value="tabBarValue" @change="index=>tabBarValue = index">
 			<template v-if="role === 'worker'">
-				<uv-tabbar-item text="任务" icon="order" @tap="goCamaraTest"></uv-tabbar-item>
-				<uv-tabbar-item text="我的" icon="account" @tap="goChartsTest"></uv-tabbar-item>
+				<uv-tabbar-item text="任务" icon="order" @tap="goWorkerTasks"></uv-tabbar-item>
+				<uv-tabbar-item text="我的" icon="account" @tap="goPersonPage"></uv-tabbar-item>
 			</template>
 			<template v-else-if="role === 'admin'">
 				<uv-tabbar-item text="数据展示" @tap="goDataDisplay">
@@ -48,13 +48,7 @@
 
 	const goCamaraTest = () => {
 		uni.reLaunch({
-			url: "/pages/dataShow/dataDisplay/dataDisplay"
-		})
-	}
-
-	const goChartsTest = () => {
-		uni.reLaunch({
-			url: "/pages/chartsTest/chartsTest"
+			url: "/pages/CamaraTest/CamaraTest"
 		})
 	}
 
@@ -79,6 +73,12 @@
 	const goUserAdmin = () => {
 		uni.reLaunch({
 			url: '/pages/userAdminPage/userAdmin/userAdmin'
+		})
+	}
+	
+	const goWorkerTasks = () => {
+		uni.reLaunch({
+			url: '/pages/workerTask/workerTaskControl/workerTaskControl'
 		})
 	}
 </script>

@@ -16,6 +16,10 @@
 					<text>{{ nickname }}</text>
 				</view>
 				<view class="personInfoListItem">
+					<text>工号：</text>
+					<text>{{ empNo }}</text>
+				</view>
+				<view class="personInfoListItem">
 					<text>身份：</text>
 					<text>{{ role }}</text>
 				</view>
@@ -71,6 +75,7 @@
 	const account = ref('')
 	const email = ref('')
 	const role = ref('')
+	const empNo = ref('')
 
 	const buttonStyle = computed(() => {
 		return {
@@ -103,6 +108,7 @@
 		account.value = userInfoStore.username
 		email.value = userInfoStore.email
 		role.value = userInfoStore.role
+		empNo.value = userInfoStore.empNo
 	})
 </script>
 

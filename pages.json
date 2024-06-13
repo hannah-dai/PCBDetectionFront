@@ -37,7 +37,7 @@
 		{
 			"path": "pages/dataShow/dataDisplay/dataDisplay",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "数据展示"
 			}
 		},
 		{
@@ -95,13 +95,34 @@
 		},
 		{
 			"path" : "pages/taskControl/personnelAssignment/personnelAssignment",
-			"style" : 
+			"style" :
 			{
 				"navigationBarTitleText" : "分配任务"
 			}
 		},
 		{
 			"path" : "pages/taskControl/taskDetail/taskDetailForUsers",
+			"style" :
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/workerTask/workerTaskStatistics/workerTaskStatistics",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/workerTask/workerTaskControl/workerTaskControl",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/workerTask/workerTaskDetail/workerTaskDetail",
 			"style" : 
 			{
 				"navigationBarTitleText" : ""

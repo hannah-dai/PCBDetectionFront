@@ -89,13 +89,20 @@
 						userInfoStore.username = data['username']
 						userInfoStore.fullName = data['fullName']
 						userInfoStore.email = data['email']
+						userInfoStore.role = data['role']
+						userInfoStore.empNo = data['empno']
 
 						uni.showToast({
 							title: '登录成功',
 							icon: 'success',
 							duration: 1000
 						})
-						goHome()
+
+						if(data['role'] === 'worker'){
+							goWorkerHome()
+						}else{
+							goHome()
+						}
 					} else {
 						uni.showToast({
 							title: res.data['errorInfo'],
@@ -134,6 +141,13 @@
 		tabBarNavigateStore.tabBarValue = 0
 		uni.reLaunch({
 			url: '/pages/dataShow/dataDisplay/dataDisplay'
+		})
+	}
+
+	const goWorkerHome = () => {
+		tabBarNavigateStore.tabBarValue = 0
+		uni.reLaunch({
+			url: '/pages/workerTask/workerTaskControl/workerTaskControl'
 		})
 	}
 </script>
