@@ -76,12 +76,6 @@
 			}
 		},
 		{
-			"path" : "pages/taskControl/taskList/taskList",
-			"style": {
-				"navigationBarTitleText": "任务列表"
-			}
-		},
-		{
 			"path": "pages/userAdminPage/userAdmin/userAdmin",
 			"style": {
 				"navigationBarTitleText": "用户管理"
@@ -101,31 +95,17 @@
 			}
 		},
 		{
-			"path" : "pages/taskControl/taskDetail/taskDetailForUsers",
-			"style" :
-			{
-				"navigationBarTitleText" : ""
-			}
-		},
-		{
-			"path" : "pages/workerTask/workerTaskStatistics/workerTaskStatistics",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
-			}
-		},
-		{
 			"path" : "pages/workerTask/workerTaskControl/workerTaskControl",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "任务列表"
 			}
 		},
 		{
 			"path" : "pages/workerTask/workerTaskDetail/workerTaskDetail",
 			"style" : 
 			{
-				"navigationBarTitleText" : ""
+				"navigationBarTitleText" : "任务详情"
 			}
 		}
 	],

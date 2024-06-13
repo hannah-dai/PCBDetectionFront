@@ -250,6 +250,9 @@
 				'finishStatus': finishStatus,
 				'timeOrder': timeOrder
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				const data = res.data
 

@@ -75,13 +75,14 @@ const submitForm = () => {
     	url: 'http://10.0.2.2:8000/userInfo/modifyUserInfo/',
 		method: 'POST',
 		data: {
-			'username': userInfoStore.username,
 			'fullName': form.value.nickname,
 			'email': form.value.email
 		},
+		header: {
+			'Authorization': uni.getStorageSync('token')
+		},
 		success: (res) => {
 			if (res.data['errorInfo'] !== undefined){
-				console.log(res.data['errorInfo'])
 				uni.showToast({
 					title: res.data['errorInfo'],
 					icon: 'error',

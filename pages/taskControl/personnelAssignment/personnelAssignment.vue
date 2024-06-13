@@ -65,6 +65,9 @@
 				'UUID': UUID,
 				'taskId': taskId.value
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				uni.showToast({
 					title: res.data.info,
@@ -92,6 +95,9 @@
 			success: (res) => {
 				workerList.value = res.data
 				filteredWorkerList.value = res.data
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			fail: (err) => {
 				uni.showToast({

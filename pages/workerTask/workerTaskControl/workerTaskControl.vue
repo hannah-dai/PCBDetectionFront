@@ -244,6 +244,9 @@
 				'timeOrder': timeOrder,
 				'UUID': '13cce9d3-7e18-4f5c-85da-c95f2a593183'
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				const data = res.data
 				taskList.value = data

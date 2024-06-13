@@ -94,6 +94,9 @@
 				'startTime': timeRange.value[0],
 				'endTime': timeRange.value[1]
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				const data = res.data
 				

@@ -107,9 +107,12 @@
 					'originalPassword': form.value.currentPassword,
 					'newPassword': form.value.newPassword
 				},
+				header: {
+					'Authorization': uni.getStorageSync('token')
+				},
 				success: (res) => {
 					let data = res.data
-					if (data['errorInfo'] === undefined) {
+					if(res.statusCode === 200){
 						uni.setStorageSync('token', '')
 						uni.showToast({
 							title: '修改密码成功',
@@ -156,6 +159,9 @@
 			method:'POST',
 			data:{
 				'username': userInfoStore.username
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				let data = res.data

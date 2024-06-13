@@ -147,6 +147,9 @@
 					'fullName': form.value.fullName,
 					'email': form.value.email
 				},
+				header: {
+					'Authorization': uni.getStorageSync('token')
+				},
 				success: (res) => {
 					if (res.statusCode === 200) {
 						let data = res.data
@@ -190,6 +193,9 @@
 			data:{
 				'UUID': userUUID.value
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				if(res.statusCode === 200){
 					uni.showToast({
@@ -225,6 +231,9 @@
 				'fullName': form.value.fullName,
 				'email': form.value.email,
 				'password': form.value.password
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				uni.showToast({
@@ -272,6 +281,9 @@
 			method:'GET',
 			data:{
 				'UUID': userUUID.value
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				if(res.data.errorInfo === undefined){

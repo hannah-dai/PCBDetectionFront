@@ -142,6 +142,9 @@
 				imageSrc.value = res.tempFilePath
 				uni.hideLoading()
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			fail: (err) => {
 				console.log("download fail for err ", err)
 			}
@@ -160,6 +163,9 @@
 			method: 'GET',
 			data: {
 				'id': taskId.value
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				task.value = res.data
@@ -301,6 +307,9 @@
 			name: 'file',
 			formData: {
 				'taskId': taskId.value
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				isUploaded.value = true

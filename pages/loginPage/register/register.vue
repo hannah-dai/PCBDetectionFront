@@ -132,13 +132,15 @@
 						userInfoStore.username = form.value.username
 						userInfoStore.fullName = form.value.fullName
 						userInfoStore.email = form.value.email
+						userInfoStore.role = 'worker'
 
 						uni.showToast({
 							title: '注册成功',
 							icon: 'success',
 							duration: 1000
 						})
-						goHome()
+						
+						goWorkerHome()
 					} else {
 						uni.showToast({
 							title: res.data['errorInfo'],
@@ -157,9 +159,9 @@
 		formRef.value.resetFields();
 	}
 
-	const goHome = () => {
+	const goWorkerHome = () => {
 		uni.reLaunch({
-			url: '/pages/dataShow/dataDisplay/dataDisplay'
+			url: '/pages/workerTask/workerTaskControl/workerTaskControl'
 		})
 	}
 

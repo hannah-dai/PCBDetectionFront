@@ -262,6 +262,9 @@
 				'userType': userType,
 				'userStatus': userStatus
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				const data = res.data
 				let list = []
@@ -291,6 +294,9 @@
 			data: {
 				'userType': '',
 				'userStatus': ''
+			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
 			},
 			success: (res) => {
 				const data = res.data
@@ -428,6 +434,9 @@
 					'password': form.value.password,
 					'fullName': form.value.fullName,
 					'email': form.value.email
+				},
+				header: {
+					'Authorization': uni.getStorageSync('token')
 				},
 				success: (res) => {
 					if (res.statusCode === 200) {

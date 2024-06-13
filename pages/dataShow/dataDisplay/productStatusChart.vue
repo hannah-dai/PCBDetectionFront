@@ -105,6 +105,9 @@
 				'endTime': timeRange.value[1],
 				'productLineId': productLineId.value
 			},
+			header: {
+				'Authorization': uni.getStorageSync('token')
+			},
 			success: (res) => {
 				const data = res.data
 				
