@@ -99,6 +99,13 @@
 			{
 				"navigationBarTitleText" : "分配任务"
 			}
+		},
+		{
+			"path" : "pages/taskControl/taskDetail/taskDetailForUsers",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 	"globalStyle": {
